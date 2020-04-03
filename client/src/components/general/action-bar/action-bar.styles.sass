@@ -1,0 +1,22 @@
+@import "../../../sass/abstract/_variables"
+.action-bar
+  display: inline-block
+  
+  &__container
+    display: flex
+    border-radius: 3px
+    background: $color-white
+    width: auto
+
+    .cta
+      border-left: 1px solid $color-grey-light-2
+      border-right: 1px solid $color-grey-light-2
+
+      &:first-child
+        border-left: none
+        padding-left: 1.5rem
+      &:last-child
+        border-right: none
+        padding-right: 1.5rem
+
+
