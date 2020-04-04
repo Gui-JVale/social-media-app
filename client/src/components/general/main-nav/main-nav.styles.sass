@@ -1,0 +1,29 @@
+@import "../../../sass/abstract/_mixins"
+@import "../../../sass/abstract/_variables"
+
+.main-nav
+
+  &__list
+
+  &__item
+    display: inline-block
+    border-right: .5px solid rgba($color-tertiary-dark, .6)
+
+    &:last-child
+      border-right: none
+
+  &__link
+    padding: 0 5rem
+    margin-top: 1.5rem
+    font-size: 4rem
+    position: relative
+
+    .MuiSvgIcon-root
+      @include absCenter 
+
+    &--main
+      transform: scale(1.2)
+
+  .main-nav__link-text
+    @include respond(tab-port)
+      display: none
