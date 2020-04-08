@@ -2,7 +2,7 @@ import React from 'react';
 
 import './footer.styles.sass';
 
-import MainNav from '../../general/main-nav/main-navigation.component';
+import { default as MainNav} from '../../general/main-nav/main-nav.container';
 
 const Footer = () => (
   <footer className="footer u-center-text">

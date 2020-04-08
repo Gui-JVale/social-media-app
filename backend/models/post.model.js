@@ -1,33 +1,31 @@
 import mongoose, { Schema } from 'mongoose';
 
 const postSchema = new Schema({
-  body: String,
+  body: {type: String, required: true},
   image: String,
-  createdAt: String,
-  username: String,
-  authorFirstName: String,
-  authorLasName: String,
-  user: {
+  createdAt: {type: Date, default: Date.now},
+  author: {
     id: {
       type: Schema.Types.ObjectId,
-      ref: "User"
-    }
+      ref: "User",
+    },
+    username: String,
+    profilePicture: String
   },
   comments: [
     {
-      body: String,
-      username: String,
-      createdAt: String
-      // type: Schema.Types.ObjectId,
-      // ref: "Comment"
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
     }
   ],
   likes: [
     {
+      id: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
       username: String,
-      createdAt: String
-      // type: Schema.Types.ObjectId,
-      // ref: "User"
+      image: String
     }
   ]
 });

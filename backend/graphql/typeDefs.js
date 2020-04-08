@@ -8,15 +8,22 @@ const typeDefs = gql`
     email: String!
     firstName: String
     lastName: String
-    token: String
+    picture: String
     createdAt: String!
+    posts: [Post]
+  }
+
+  type Author {
+    id: ID!
+    username: String!
+    profilePicture: String
   }
 
   type Post {
     id: ID!
     body: String!
     image: String
-    username: String!
+    author: Author!
     comments: [Comment]
     likes: [Likes]
   }
@@ -24,7 +31,7 @@ const typeDefs = gql`
   type Comment {
     id: ID!
     body: String!
-    createdAt: String!
+    createdAt: String
     username: String
   }
 
@@ -36,23 +43,31 @@ const typeDefs = gql`
 
   input CreateUserInput {
     username: String!
-    firstName: String!
-    lastName: String!
+    firstName: String
+    lastName: String
     password: String!
     confirmPassword: String!
     email: String!
+    picture: String!
+  }
+
+  type AuthPayload {
+    user: User
   }
 
   type Query {
-    getUsers: [User!]!
-    getPosts: [Post!]!
+    users: [User!]!
+    currentUser: User
+    getUserById(userId: ID!): User
+    posts: [Post!]!
     getPostById(postId: ID!): Post
   }
 
   type Mutation {
     createUser(createUserInput: CreateUserInput): User!
-    login(username: String!, password: String!): User!
-    createPost(body: String!, image: String!): Post
+    login(username: String!, password: String!): User
+    logout: Boolean
+    createPost(body: String!, image: String): Post
     deletePost(postId: ID!): String!
     createComment(postId: ID!, body: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!

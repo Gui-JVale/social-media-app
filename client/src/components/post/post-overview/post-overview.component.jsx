@@ -3,19 +3,32 @@ import React from 'react';
 import './post-overview.styles.sass';
 
 import ContentBox from '../../general/content-box/content-box.component';
-import PostHeader from '../post-header/post-header.component';
-import PostBody from '../post-body/post-body.component';
-import PostFooter from '../post-footer/post-footer.component';
+import Profile from '../../profile/profile/profile.component';
+import PostActionBar from '../post-action-bar/post-action-bar.component';
+import MoreOptionsIcon from '../../general/more-options-icon/more-options-icon.component';
 
 
-const Post = () => (
+const PostOverview = ({ body, author: { username, profilePicture} }) => (
   <div className="post">
     <ContentBox>
-        <PostHeader />
-        <PostBody />
-        <PostFooter />
+        <header className="post__header">
+          <MoreOptionsIcon 
+            iconWrapperClassName="post__more-options"
+          />
+          <Profile
+            isPost 
+            username={username} 
+            profilePictureUrl={profilePicture} 
+          />
+        </header>
+        <main className="post__body">
+          {body}
+        </main>
+        <footer className="post-footer">
+          <PostActionBar />
+        </footer>
     </ContentBox>
   </div>
 );
 
-export default Post;
+export default PostOverview;

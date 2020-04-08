@@ -1,36 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient, gql } from 'apollo-boost';
+import { ApolloClient } from 'apollo-boost';
+
+import {typeDefs, resolvers } from './graphql/resolvers'
 
 import './index.css';
-import App from './App';
+import { default as App} from './App/App.container';
 
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql'
+const link = createHttpLink({
+  uri: 'http://localhost:4000/graphql',
+  onError: ({ networkError, graphQLErrors }) => {
+    console.log('graphQLErrors', graphQLErrors)
+    console.log('networkError', networkError)
+  },
+  credentials: 'include'
 });
 
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
-  link: httpLink,
-  cache
+  cache,
+  link,
+  typeDefs,
+  resolvers
 });
 
-client.query({
-  query: gql`
-  {
-    getPosts {
-      id,
-      username
-      body
-    }
+
+client.writeData({
+  data: {
+    currentUserId: localStorage.getItem('currentUserId') || null,
   }
-`
-}).then(res => console.log(res))
+});
 
 ReactDOM.render(
   <ApolloProvider client={client}>

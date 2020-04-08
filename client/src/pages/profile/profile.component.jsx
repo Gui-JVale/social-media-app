@@ -1,8 +1,11 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 
-const ProfilePage = () => (
+import { default as Profile } from '../../components/profile/profile/profile.container'
+                                
+const ProfilePage = ({ match }) => (                                                                      
   <div className="profile-page">
-    THIS IS THE PROFILE PAGE
+    <Route exact path={`${match.path}/:userId`} render={(props) => <Profile big {...props}/>} />
   </div>
 );
 

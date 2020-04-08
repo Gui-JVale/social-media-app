@@ -4,7 +4,7 @@ import './cta.styles.sass';
 
 const Cta = ({ Icon, text }) => (
   <div className="cta">
-    <Icon />
+    { Icon ? <Icon /> : null }
     <span className="cta__text">{ text }</span>
   </div>
 );

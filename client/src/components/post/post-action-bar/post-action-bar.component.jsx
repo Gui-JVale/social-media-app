@@ -2,13 +2,13 @@ import React from 'react';
 
 import { ThumbUpAlt, ChatBubbleOutline, KeyboardTab } from '@material-ui/icons'
 
-import ActionBarContainer from '../../general/action-bar/action-bar.component';
+import ActionBar from '../../general/action-bar/action-bar.component';
 import Cta from '../../general/cta/cta.component';
 
 const PostActionBar = () => {
   return (
     <div className="post__action-bar">
-      <ActionBarContainer>
+      <ActionBar>
         <Cta 
           Icon={ThumbUpAlt}
           text="Like"
@@ -21,7 +21,7 @@ const PostActionBar = () => {
           Icon={KeyboardTab}
           text="Share"
         />
-      </ActionBarContainer>
+      </ActionBar>
     </div>
   )
 };

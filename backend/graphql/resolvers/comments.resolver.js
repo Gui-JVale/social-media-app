@@ -1,13 +1,12 @@
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
 
 import Post from '../../models/post.model';
-import checkAuth from '../../utils/check-auth';
 
 const commentResolvers = {
   Mutation: {
     createComment: async (_, { postId, body }, context ) => {
       try {
-        const { username } = checkAuth(context);
+        const { username } = context.getUser();
         if(body.trim() === '') {
           throw new UserInputError("Empty Comment"),  {
             errors: {
@@ -37,7 +36,7 @@ const commentResolvers = {
 
     deleteComment: async (_, { postId, commentId }, context ) => {
       try{
-        const { username } = checkAuth(context);
+        const { username } = context.getUser();
         const post = await Post.findById(postId);
         if(post) {
           const commentIndex = post.comments.findIndex(c => c.id === commentId);

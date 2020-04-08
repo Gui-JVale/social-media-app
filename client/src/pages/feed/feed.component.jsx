@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Post from '../../components/post/post-overview/post-overview.component';
+import PostOverview from '../../components/post/post-overview/post-overview.component';
 
-const Feed = () => (
+const Feed = ({ posts }) => (
   <div className="feed">
-    <Post />
+    {posts.map(({id, body, author, ...rest}) => <PostOverview key={id} body={body} author={author} {...rest}/>)}
   </div>
 );
 

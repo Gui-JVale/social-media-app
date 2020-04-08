@@ -6,7 +6,14 @@ const userSchema = new Schema({
   password: String,
   firstName: { type: String },
   lastName: { type: String },
-  createdAt: { type: String, default: Date.now }
+  picture: String,
+  createdAt: { type: Date, default: Date.now },
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Post"
+    }
+  ]
 });
 const User = mongoose.model('User', userSchema);
 

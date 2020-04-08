@@ -1,11 +1,10 @@
 import { AuthenticationError, UserInputError } from 'apollo-server-express';
 
 import Post from '../../models/post.model';
-import  checkAuth from '../../utils/check-auth';
 
 const postResolvers = {
   Query: {
-    getPosts: async () =>{
+    posts: async () =>{
       try {
        const posts = await Post.find().sort({ createdAt: -1})
         return posts
@@ -27,20 +26,32 @@ const postResolvers = {
     }
   },
   Mutation : {
-    createPost: async (_root, { body, image}, context) => {
-      const user = checkAuth(context);
-      const post = new Post({
-        body, 
-        image, 
-        user: user.id,
-        username: user.username,
-        createdAt: new Date().toISOString()
-      });
-      await post.save();
-      return post; 
+    createPost: async (_root, { body, image }, context) => {
+      try {
+        const user = await context.getUser();
+        if(!user) {
+          throw new AuthenticationError("You must be logged in to do that!")
+        }
+        const post = await Post.create({
+          body,
+          image,
+          author: {
+            id: user._id,
+            username: user.username,
+            profilePicture: user.picture
+          },
+          createdAt: new Date()
+        })
+        user.posts.push(post);
+        await user.save();
+        return post;
+
+      } catch(e) {
+        throw new Error(e)
+      }
     },
     deletePost: async (_, { postId }, context) => {
-      const user = checkAuth(context);
+      const user = await context.getUser();
       try {
         const post = await Post.findById(postId);
         if(user.username === post.username) {
@@ -54,9 +65,9 @@ const postResolvers = {
         throw new Error(`Didn't delete post, ${e}`)
       }
     },
-    likePost: async (_, { postId, username }, context) => {
+    likePost: async (_, { postId }, context) => {
       try {
-        const { username } = checkAuth(context);
+        const { username } = context.getUser();
         const post = await Post.findById(postId);
         if(post) {
           if(post.likes.find(like => like.username === username)) {

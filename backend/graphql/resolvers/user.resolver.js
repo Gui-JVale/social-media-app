@@ -3,63 +3,45 @@ import { UserInputError } from 'apollo-server-express';
 import User from '../../models/user.model'
 import { validateCreateUserInput, validateLoginInput } from '../../utils/validators';
 
-
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-
-const generateToken = user => {
-  return jwt.sign(
-    {
-      id: user.id,
-      email: user.email,
-      username: user.username,
-    }, 
-    process.env.JWT_KEY, 
-    { expiresIn: 3600 } 
-  )
-}
+import bcrypt from 'bcryptjs';
 
 const userResolvers = {
   Query: {
-    getUsers: async () =>{
+    users: async () => {
       try {
        const posts = await User.find()
         return posts
       } catch(e) {
         throw new Error(err)
       }
-    }  
+    },
+    currentUser: async  (_, __, context) => await context.getUser(),
+    getUserById: async (_, { userId }) => {
+      try {
+        const user = await User.findById(userId).populate("posts");
+        if(user) return user;
+        throw new Error("User not found");
+      } catch(err) {
+        throw new Error(err)
+      }
+    }
   },
   Mutation: {
-    login: async (_, {username, password }) => {
-      const {errors, valid } = validateLoginInput(username, password);
-
-      if(!valid) {
-        throw new UserInputError('Errors', { errors })
+    login: async (_, { username, password }, context) => {
+      try {
+        console.log("At least Tried")
+        const { errors, valid } = validateLoginInput(username, password);
+        if (!valid) {
+          throw new UserInputError('Errors', { errors })
+        }
+        const { user } = await context.authenticate('graphql-local', { username, password });
+        await context.login(user);
+        return user;
+      }catch(e) {
+        throw new Error(e)
       }
-
-      const user = await User.findOne({ username });
-
-      if(!user) {
-        errors.general = "User not found";
-        throw new UserInputError('User not found', { errors });
-      };
-
-      const match = await bcrypt.compare(password, user.password);
-      if(!match) {
-        errors.general = "Wrong credentials";
-        throw new UserInputError('Wrong credentials', { errors });
-      };
-
-      const token = generateToken(user);
-
-      return {
-        ...user._doc,
-        id: user._id,
-        token
-      }
-
     },
+    logout: (_, __, context) => context.logout(), 
     createUser: async (_, {
       createUserInput: { 
         username, 
@@ -67,6 +49,7 @@ const userResolvers = {
         lastName, 
         email, 
         password, 
+        picture,
         confirmPassword 
       }
     }) => {
@@ -76,7 +59,6 @@ const userResolvers = {
         if(!valid) {
           throw new UserInputError('Errors', { errors })
         }
-
         // Check if username already exists
         const user = await User.findOne({ username });
         if (user) {
@@ -88,28 +70,24 @@ const userResolvers = {
         };
 
         // Encrypt Password
-        password = await bcrypt.hash(password, 12);
-  
+        const salt = await bcrypt.genSaltSync(10)
+        const hash = await  bcrypt.hashSync(password , salt)
+
         // Create User
         const newUser = new User({
           username, 
           firstName, 
           lastName, 
+          picture,
           email, 
-          password,
-          createdAt: new Date().toISOString()
+          password: hash,
+          createdAt: new Date()
+
         });
 
         const res = await newUser.save();
-  
-        // JWT Token
-        const token = generateToken(res);
-  
-        return {
-          ...res._doc,
-          id: res._id,
-          token
-        };
+        return res;
+
       } catch(e) {
         throw new Error*(e)
       }
