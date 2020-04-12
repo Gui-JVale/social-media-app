@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { CREATE_POST } from '../graphql/mutations';
 import { GET_POSTS } from '../graphql/queries';
 
-import CreatePostForm from '../components/post/create-post-form/create-post-form.component';
+import SubmitPostForm from '../components/post/submit-post-form/submit-post-form.component';
 
 const CreatePostContainer = ({ history }) => {
   const [createPost] = useMutation(CREATE_POST, {
@@ -19,7 +19,7 @@ const CreatePostContainer = ({ history }) => {
     }
   })
 
-  return <CreatePostForm createPost={body => createPost({ variables: { body }})} />
+  return <SubmitPostForm onSubmit={body => createPost({ variables: { body }})} />
 
 };
 

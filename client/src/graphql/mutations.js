@@ -2,7 +2,7 @@ import  { gql } from 'apollo-boost';
 
 // BACKEND MUTATIONS
 export const CREATE_POST = gql`
-mutation createPost ($body: String!){
+mutation CreatePost ($body: String!){
   createPost (body: $body image: "img") {
     id
     body
@@ -15,8 +15,22 @@ mutation createPost ($body: String!){
 }
 `;
 
+export const EDIT_POST = gql`
+  mutation EditPost($postId: ID!, $body: String!) {
+    editPost(postId: $postId, body: $body) {
+      id
+      body
+      dropdownHidden @client
+      author {
+        id
+        username
+      }
+    }
+  }
+`;
+
 export const DELETE_POST = gql`
-  mutation deletePost($postId: ID!) {
+  mutation DeletePost($postId: ID!) {
     deletePost(postId: $postId) {
       id
     }

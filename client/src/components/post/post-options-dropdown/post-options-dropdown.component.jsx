@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './post-options-dropdown.styles.sass';
 
-const PostOptionsDropdown = ({ isHidden, toggleHidden, deletePost }) => {
+const PostOptionsDropdown = ({ isHidden, toggleHidden, deletePost, postId }) => {
   
   const handleDeletePost = async () => {
     try {
@@ -16,7 +17,9 @@ const PostOptionsDropdown = ({ isHidden, toggleHidden, deletePost }) => {
   return (
     <div className={`post-options-dropdown ${isHidden ? "isHidden" : ""}`}>
       <ul className="post-options-dropdown__list"> 
-        <li className="post-options-dropdown__item">Edit Post</li>
+        <li className="post-options-dropdown__item">
+          <Link to={`/posts/${postId}/edit`}>Edit Post</Link>
+        </li>
         <li className="post-options-dropdown__item" onClick={handleDeletePost}>Delete Post</li>
       </ul>
     </div>

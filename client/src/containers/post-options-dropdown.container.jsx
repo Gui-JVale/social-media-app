@@ -25,6 +25,7 @@ const PostOptionsDropdownContainer = ({ postId, ...props }) => {
     <PostOptionsDropdown 
       deletePost={deletePost} 
       toggleHidden={toggleDropdownHidden}
+      postId={postId}
       {...props} 
     />
 

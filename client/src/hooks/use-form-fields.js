@@ -7,7 +7,7 @@ const useFormFields = (initialState) => {
     setValues({...values, [e.target.name]: e.target.value})
   }
 
-  return {handleChange, values};
+  return { handleChange, values };
 };
 
 export default useFormFields;

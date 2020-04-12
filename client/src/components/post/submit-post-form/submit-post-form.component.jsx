@@ -4,13 +4,13 @@ import useFormFields from '../../../hooks/use-form-fields';
 
 import FormInput from '../../atoms/form-input/form-input.component';
 
-const CreatePostForm = ({ createPost }) => {
-  const { handleChange, values } = useFormFields({ body: ''})
+const SubmitPostForm = ({ onSubmit, post }) => {
+  const { handleChange, values } = useFormFields({ body: post.body || ''})
 
   const handleSubmit = async e => {
     try {
       e.preventDefault();
-      await createPost(values.body);
+      await onSubmit(values.body);
     }catch(e) {
       console.log(e)
     }
@@ -35,4 +35,4 @@ const CreatePostForm = ({ createPost }) => {
   )
 };
 
-export default CreatePostForm;
+export default SubmitPostForm;
