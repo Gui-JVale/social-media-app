@@ -13,7 +13,7 @@ const CreatePostContainer = ({ history }) => {
       const { posts } = cache.readQuery({ query: GET_POSTS })
       cache.writeData({
         query: GET_POSTS,
-        data: { posts: posts.concat(createPost)}
+        data: { posts: posts.push(createPost)}
       })
       return history.push('/')
     }

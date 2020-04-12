@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const GET_CURRENT_USER = gql`
-  {
+  query GetCurrentUser {
     currentUser {
       id
       username
@@ -26,15 +26,6 @@ export const GET_POSTS = gql`
     }
   }
 `;
-
-export const GET_DROPDOWN_HIDDEN = gql`
-  query GetDropdownHidden($postId: ID!) {
-    dropdownHidden(postId: $postId) {
-      dropdownHidden @client
-    }
-  }
-`;
-
 
 export const GET_USER_BY_ID = gql`
   query getUserById($userId: ID!) {

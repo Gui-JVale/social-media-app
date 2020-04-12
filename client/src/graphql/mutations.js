@@ -6,6 +6,7 @@ mutation createPost ($body: String!){
   createPost (body: $body image: "img") {
     id
     body
+    dropdownHidden @client
     author {
       id
       username

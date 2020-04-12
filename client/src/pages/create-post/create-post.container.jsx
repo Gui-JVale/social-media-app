@@ -11,7 +11,6 @@ const CreatePostContainer = ({ history }) => {
   const [createPost] = useMutation(CREATE_POST, {
     update(cache, {data: { createPost }}) {
       const { posts } = cache.readQuery({ query: GET_POSTS})
-      console.log(createPost)
       cache.writeData({
         query: GET_POSTS,
         data: { posts: posts.concat(createPost)}

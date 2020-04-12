@@ -2,11 +2,7 @@ import { gql } from 'apollo-boost';
 
 export const typeDefs = gql`
   extend type Post {
-    dropdownHidden: Boolean
-  }
-
-  extend type Query {
-    dropdownHidden(postId: ID!): Boolean!
+    dropdownHidden: Boolean!
   }
 `;
 
