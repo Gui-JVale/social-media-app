@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import { default as Profile } from '../../components/profile/profile/profile.container'
+import { default as Profile } from '../../containers/profile.container'
                                 
 const ProfilePage = ({ match }) => (                                                                      
   <div className="profile-page">

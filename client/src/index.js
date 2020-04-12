@@ -9,7 +9,7 @@ import { ApolloClient } from 'apollo-boost';
 import {typeDefs, resolvers } from './graphql/resolvers'
 
 import './index.css';
-import { default as App} from './App/App.container';
+import { default as App} from './containers/App.container';
 
 const link = createHttpLink({
   uri: 'http://localhost:4000/graphql',

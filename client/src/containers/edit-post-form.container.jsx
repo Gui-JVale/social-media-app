@@ -20,7 +20,7 @@ const EditPostContainer = ({ history, match }) => {
   if(loading) return <Spinner />
   if(error) return <p>Error {error}</p>
 
-  const post = data.getPostById || null;
+  const post = data.getPostById ? data.getPostById : null;
 
   return (
     <SubmitPostForm 

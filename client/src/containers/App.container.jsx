@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import { GET_CURRENT_USER } from '../graphql/queries';
 
-import App from './App';
+import App from '../App/App';
 import Spinner from '../components/atoms/spinner/spinner.component';
 
 

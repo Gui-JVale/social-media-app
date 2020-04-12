@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
-import { GET_USER_BY_ID } from '../../../graphql/queries';
+import { GET_USER_BY_ID } from '../graphql/queries';
 
-import Spinner from '../../atoms/spinner/spinner.component';
-import Profile from './profile.component';
+import Spinner from '../components/atoms/spinner/spinner.component';
+import Profile from '../components/profile/profile/profile.component';
 
 
 const ProfileContainer = ({ match, big }) => {

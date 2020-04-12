@@ -5,7 +5,8 @@ import useFormFields from '../../../hooks/use-form-fields';
 import FormInput from '../../atoms/form-input/form-input.component';
 
 const SubmitPostForm = ({ onSubmit, post }) => {
-  const { handleChange, values } = useFormFields({ body: post.body || ''})
+  const initialState = post ? {body: post.body} : {body: ''};
+  const { handleChange, values } = useFormFields(initialState)
 
   const handleSubmit = async e => {
     try {
