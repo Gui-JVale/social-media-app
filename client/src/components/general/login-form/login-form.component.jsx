@@ -1,15 +1,16 @@
-import React, { useState } from 'react'; 
+import React from 'react'; 
 import { withRouter } from 'react-router-dom';
+
+import useFormField from '../../../hooks/use-form-fields';
 
 import FormInput from '../../atoms/form-input/form-input.component'; 
 
 const LoginForm = ({ login, history }) => {
-  const [ userCredentials, setUserCredentials ] = useState({ 
+  const { handleChange, values: { username, password } } = useFormField({ 
     username: "", 
     password: ""
   });
 
-  const { username, password } = userCredentials; 
 
   const handleSubmit = async event => {
     try {
@@ -21,11 +22,6 @@ const LoginForm = ({ login, history }) => {
     }
   }
 
-  const handleChange = event => {
-    const { value, name } = event.target;
-
-    setUserCredentials({...userCredentials,  [name]: value });
-  }
 
   return (
     <div className="sign-in">

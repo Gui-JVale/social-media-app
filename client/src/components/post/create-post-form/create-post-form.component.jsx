@@ -1,28 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import useFormFields from '../../../hooks/use-form-fields';
 
 import FormInput from '../../atoms/form-input/form-input.component';
 
 const CreatePostForm = ({ createPost }) => {
-  const [ registerFields, setRegisterFields] = useState({
-    body: "",
-  });
-
-  const { body } = registerFields;
+  const { handleChange, values } = useFormFields({ body: ''})
 
   const handleSubmit = async e => {
     try {
       e.preventDefault();
-      await createPost(body);
+      await createPost(values.body);
     }catch(e) {
       console.log(e)
     }
   };
-
-  const handleChange = e => {
-    const { value, name } = e.target;
-
-    setRegisterFields({...registerFields, [name]: value })
-  }
 
   return (
     <div className="create-post-form">
@@ -30,7 +22,7 @@ const CreatePostForm = ({ createPost }) => {
         <FormInput
           name="body"
           type="textarea"
-          value={body}
+          value={values.body}
           handleChange={handleChange}
           label="How do you feel?"
           required 

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import useFormFields from '../../../hooks/use-form-fields';
 
 import FormInput from '../../atoms/form-input/form-input.component';
 
 const RegisterForm = ({ register }) => {
-  const [ registerFields, setRegisterFields] = useState({
+  const { handleChange, values: {email, username, picture, password, confirmPassword} } = useFormFields({
     email: "",
     username: "",
     picture: "",
@@ -11,7 +13,6 @@ const RegisterForm = ({ register }) => {
     confirmPassword: ""
   });
 
-  const { email, username, password, confirmPassword, picture } = registerFields;
 
   const handleSubmit = async e =>{
     try {
@@ -21,12 +22,6 @@ const RegisterForm = ({ register }) => {
       console.log(e)
     }
   };
-
-  const handleChange = e => {
-    const { value, name } = e.target;
-
-    setRegisterFields({...registerFields, [name]: value })
-  }
 
   return (
     <div className="register-form">
