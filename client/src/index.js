@@ -32,7 +32,10 @@ const client = new ApolloClient({
 
 client.writeData({
   data: {
-    currentUserId: localStorage.getItem('currentUserId') || null,
+    networkStatus: {
+      __typename: 'NetworkStatus',
+      isConnected: false,
+    },
   }
 });
 

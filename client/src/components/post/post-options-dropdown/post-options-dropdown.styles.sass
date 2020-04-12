@@ -1,0 +1,20 @@
+@import "../../../sass/abstract/_variables"
+  
+.post-options-dropdown
+  position: absolute
+  top: 5rem
+  right: 2rem
+  background: $color-grey-light-1
+  box-shadow: 0 1rem 2.5rem rgba($color-black, .05)
+
+  &__list
+    list-style: none
+
+  &__item
+    padding: .5rem 3rem
+
+    &:not(:last-child) 
+      border-bottom: 1px solid $color-grey-light-2
+
+  &.isHidden
+    display: none

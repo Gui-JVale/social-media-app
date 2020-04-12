@@ -13,26 +13,28 @@ export const GET_CURRENT_USER = gql`
 `;
 
 export const GET_POSTS = gql`
-  {
+  query Posts {
     posts {
       id
       body
+      dropdownHidden @client
       author {
         id
         username
         profilePicture
       }
-      comments {
-        id
-        body
-        username
-      }
-      likes{
-        username
-      }
     }
   }
 `;
+
+export const GET_DROPDOWN_HIDDEN = gql`
+  query GetDropdownHidden($postId: ID!) {
+    dropdownHidden(postId: $postId) {
+      dropdownHidden @client
+    }
+  }
+`;
+
 
 export const GET_USER_BY_ID = gql`
   query getUserById($userId: ID!) {

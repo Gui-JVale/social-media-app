@@ -12,6 +12,8 @@ const FeedContainer = () => {
   if (loading) return <Spinner />
   if (error) return <p>Error...{error}</p>
 
+  console.log(data)
+
   return <Feed posts={data.posts} />
 };
 

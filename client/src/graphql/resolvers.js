@@ -1,20 +1,32 @@
 import { gql } from 'apollo-boost';
-import { GET_CURRENT_USER } from './queries';
 
 export const typeDefs = gql`
-  extend type Mutation {
-    SetCurrentUser(userId: ID!): User!
+  extend type Post {
+    dropdownHidden: Boolean
+  }
+
+  extend type Query {
+    dropdownHidden(postId: ID!): Boolean!
   }
 `;
 
-
 export const resolvers = {
+  Post: {
+    dropdownHidden: () => true
+  },
+
   Mutation: {
-    setCurrentUser: (_parent, { user }, { cache }) => {
-      cache.writeQuery({
-        query: GET_CURRENT_USER,
-        data: { currentUser: user }
-      })
+    toggleDropdownHidden: (_parent, variables, { cache, getCacheKey }) => {
+      const id = getCacheKey({ __typename: 'Post', id: variables.id});
+      const  fragment = gql`
+        fragment dropdownHidden on Post {
+          dropdownHidden
+        }
+      `;
+      const postFragment = cache.readFragment({ fragment, id });
+      const data = {...postFragment, dropdownHidden: !postFragment.dropdownHidden}
+      cache.writeData({ id, data })
+      return data.dropdownHidden;
     }
   }
 }

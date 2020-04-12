@@ -6,14 +6,25 @@ mutation createPost ($body: String!){
   createPost (body: $body image: "img") {
     id
     body
-    username
+    author {
+      id
+      username
+    }
   }
 }
 `;
 
+export const DELETE_POST = gql`
+  mutation deletePost($postId: ID!) {
+    deletePost(postId: $postId) {
+      id
+    }
+  }
+`;
+
 // CLIENT MUTATIONS
-export const SET_CURRENT_USER = gql`
-  mutation SetCurrentUser {
-    setCurrentUser @client
+export const TOGGLE_DROPDOWN_HIDDEN = gql`
+  mutation ToggleDropdownHidden($id: Int!) {
+    toggleDropdownHidden(id: $id) @client
   }
 `;

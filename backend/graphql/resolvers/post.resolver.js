@@ -54,9 +54,10 @@ const postResolvers = {
       const user = await context.getUser();
       try {
         const post = await Post.findById(postId);
-        if(user.username === post.username) {
+        if(user.username === post.author.username) {
           await post.delete();
-          return "POST DELETED SUCCEFULLY"
+          console.log(post)
+          return post;
         } else {
           throw new AuthenticationError('Action not Allowed');
         }

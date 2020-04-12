@@ -1,12 +1,26 @@
 import React from 'react';
 
-const PostOptionsDropdown = (
-  <div className="post-options-dropdown">
-    <ul className="post-options-dropdown__list">
-      <li className="post-options-dropdown__item">Edit Post</li>
-      <li className="post-options-dropdown__item">Delet Post</li>
-    </ul>
-  </div>
-);
+import './post-options-dropdown.styles.sass';
 
-export const PostOptionsDropdown;
+const PostOptionsDropdown = ({ isHidden, toggleHidden, deletePost }) => {
+  
+  const handleDeletePost = async () => {
+    try {
+      await deletePost();
+      return toggleHidden();
+    }catch(e) {
+      console.log(e)
+    }
+  }
+
+  return (
+    <div className={`post-options-dropdown ${isHidden ? "isHidden" : ""}`}>
+      <ul className="post-options-dropdown__list"> 
+        <li className="post-options-dropdown__item">Edit Post</li>
+        <li className="post-options-dropdown__item" onClick={handleDeletePost}>Delete Post</li>
+      </ul>
+    </div>
+  );
+};
+
+export default PostOptionsDropdown;
