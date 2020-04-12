@@ -1,11 +1,11 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
-import { GET_CURRENT_USER } from '../../../graphql/queries';
-import { TOGGLE_DROPDOWN_HIDDEN } from '../../../graphql/mutations';
+import { GET_CURRENT_USER } from '../graphql/queries';
+import { TOGGLE_DROPDOWN_HIDDEN } from '../graphql/mutations';
 
-import Post from './post.component';
-import Spinner from '../../general/spinner/spinner.component';
+import Post from '../components/post/post/post.component';
+import Spinner from '../components/atoms/spinner/spinner.component';
 
 
 const PostContainer = ({postId, ...props}) => {

@@ -50,13 +50,24 @@ const postResolvers = {
         throw new Error(e)
       }
     },
+    editPost: async (_, {postId, body}, context) => {
+      try{
+        const user = await context.getUser();
+        if(!user) {
+          throw new AuthenticationError("You must be logged in to do that")
+        };
+        const post = await Post.findByIdAndUpdate(postId, {body})
+        return post;
+      }catch(e) {
+        throw new Error(e);
+      }
+    },
     deletePost: async (_, { postId }, context) => {
       const user = await context.getUser();
       try {
         const post = await Post.findById(postId);
         if(user.username === post.author.username) {
           await post.delete();
-          console.log(post)
           return post;
         } else {
           throw new AuthenticationError('Action not Allowed');

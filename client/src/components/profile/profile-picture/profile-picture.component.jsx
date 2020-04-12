@@ -2,7 +2,7 @@ import React from 'react';
 
 import './profile-picture.styles.sass';
 
-import ImgWrapper from '../../general/img-wrapper/img-wrapper.component';
+import ImgWrapper from '../../atoms/img-wrapper/img-wrapper.component';
 
 const ProfilePicture = ({ big, imgUrl }) => (
   <div className={`profile-picture`}>

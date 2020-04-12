@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Profile from '../../components/profile/profile/profile.component';
-import { default as CreatePostForm } from '../../components/post/create-post-form/create-post-form.container';
+import { default as CreatePostForm } from '../../containers/create-post-form.container';
 
-const CreatePostPage = () => (
+const SubmitPostPage = () => (
   <div className="make-post-page">
     <Profile isPost/>
     <CreatePostForm />
@@ -11,4 +11,4 @@ const CreatePostPage = () => (
   </div>
 );
 
-export default CreatePostPage;
+export default SubmitPostPage;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
-import LoginForm from './login-form.component';
+import LoginForm from '../components/general/login-form/login-form.component';
 
 const LOGIN_USER = gql`
   mutation login (

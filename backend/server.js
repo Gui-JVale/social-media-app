@@ -78,7 +78,7 @@ const startServer = async () => {
   // MONGODB SETUP
   const uri = process.env.ATLAS_URI;
   const connection = mongoose.connection;
-  await mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+  await mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
   connection.once('open', () => {
     console.log("DATABASE CONNECTION ESTABLISHED")
   })

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import { default as LoginForm } from '../../components/general/login-form/login-form.container';
-import { default as RegisterForm } from '../../components/general/register-form/register-form.container';
+import { default as LoginForm } from '../../containers/login-form.container';
+import { default as RegisterForm } from '../../containers/register-form.container';
 
 const AuthPage = () => {
   const [isLoginPage, setIsLoginPage] = useState(true)

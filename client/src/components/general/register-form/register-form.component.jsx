@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import FormInput from '../form-input/form-input.component';
+import FormInput from '../../atoms/form-input/form-input.component';
 
 const RegisterForm = ({ register }) => {
   const [ registerFields, setRegisterFields] = useState({

@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { withRouter } from 'react-router-dom';
 
-import RegisterForm from './register-form.component';
+import RegisterForm from '../components/general/register-form/register-form.component';
 
 const CREATE_USER = gql`
   mutation createUser (

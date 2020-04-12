@@ -1,10 +1,10 @@
 import React from 'react';
 import { useMutation,  } from '@apollo/react-hooks';
 
-import { DELETE_POST, TOGGLE_DROPDOWN_HIDDEN } from '../../../graphql/mutations';
-import { GET_POSTS } from '../../../graphql/queries';
+import { DELETE_POST, TOGGLE_DROPDOWN_HIDDEN } from '../graphql/mutations';
+import { GET_POSTS } from '../graphql/queries';
 
-import PostOptionsDropdown from './post-options-dropdown.component';
+import PostOptionsDropdown from '../components/post/post-options-dropdown/post-options-dropdown.component';
 
 
 

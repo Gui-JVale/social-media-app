@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import FormInput from '../../general/form-input/form-input.component';
+import FormInput from '../../atoms/form-input/form-input.component';
 
-const CreatePostForm = ({createPost}) => {
+const CreatePostForm = ({ createPost }) => {
   const [ registerFields, setRegisterFields] = useState({
     body: "",
   });

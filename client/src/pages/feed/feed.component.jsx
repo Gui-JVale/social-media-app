@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { default as Post } from '../../components/post/post/post.container';
+import { default as Post } from '../../containers/post.container';
 
 const Feed = ({ posts }) => (
   <div className="feed">

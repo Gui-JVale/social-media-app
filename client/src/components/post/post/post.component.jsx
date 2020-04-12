@@ -6,7 +6,7 @@ import ContentBox from '../../general/content-box/content-box.component';
 import Profile from '../../profile/profile/profile.component';
 import PostActionBar from '../post-action-bar/post-action-bar.component';
 import MoreOptionsIcon from '../../general/more-options-icon/more-options-icon.component';
-import { default as PostOptionsDropdown}  from '../post-options-dropdown/post-options-dropdown.container';
+import { default as PostOptionsDropdown}  from '../../../containers/post-options-dropdown.container';
 
 
 const Post = ({ postId, body, author, currentUserId, dropdownHidden, toggleDropdownHidden }) => {

@@ -2,10 +2,10 @@ import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 
-import { CREATE_POST } from '../../../graphql/mutations';
-import { GET_POSTS } from '../../../graphql/queries';
+import { CREATE_POST } from '../graphql/mutations';
+import { GET_POSTS } from '../graphql/queries';
 
-import CreatePostForm from './create-post-form.component';
+import CreatePostForm from '../components/post/create-post-form/create-post-form.component';
 
 const CreatePostContainer = ({ history }) => {
   const [createPost] = useMutation(CREATE_POST, {

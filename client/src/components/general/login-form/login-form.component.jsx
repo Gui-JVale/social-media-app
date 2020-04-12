@@ -1,7 +1,7 @@
 import React, { useState } from 'react'; 
 import { withRouter } from 'react-router-dom';
 
-import FormInput from '../form-input/form-input.component'; 
+import FormInput from '../../atoms/form-input/form-input.component'; 
 
 const LoginForm = ({ login, history }) => {
   const [ userCredentials, setUserCredentials ] = useState({ 

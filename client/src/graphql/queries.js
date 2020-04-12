@@ -27,6 +27,14 @@ export const GET_POSTS = gql`
   }
 `;
 
+export const GET_POST_BY_ID = gql`
+  query GetPostById($postId: ID!) {
+    getPostById(postId: $postId) {
+      body
+    }
+  }
+`;
+
 export const GET_USER_BY_ID = gql`
   query getUserById($userId: ID!) {
     getUserById (userId: $userId) {

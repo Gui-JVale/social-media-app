@@ -5,12 +5,12 @@ import './App.styles.sass';
 
 
 import Header from '../components/layout/header/header.component';
-import Container from '../components/general/container/container.component';
+import Container from '../components/layout/container/container.component';
 import { default as Feed} from '../pages/feed/feed.container';
 import ProfilePage from '../pages/profile/profile.component';
 import Footer from '../components/layout/footer/footer.component';
 import AuthPage from '../pages/auth/auth.component';
-import CreatePostPage from '../pages/create-post/create-post.component';
+import SubmitPostPage from '../pages/submit-post/submit-post.component';
 import PrivateRoute from '../components/general/private-route/private-route.component';
 
 
@@ -24,7 +24,9 @@ function App({ currentUser }) {
 
           <PrivateRoute path="/profile" component={ProfilePage} currentUser={currentUser} />
 
-          <PrivateRoute path="/create-post" component={CreatePostPage} currentUser={currentUser} />
+          <PrivateRoute path="/create-post" component={SubmitPostPage} currentUser={currentUser} />
+
+          <PrivateRoute path="/posts/:postId/edit" component={SubmitPostPage} currentUser={currentUser} />
 
           <Route path="/auth" component={AuthPage} />  
         </Switch>
