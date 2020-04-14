@@ -4,6 +4,8 @@ import session from 'client-sessions';
 import cors from 'cors'
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
+import helmet from 'helmet';
+
 import User from './models/user.model';
 
 import { GraphQLLocalStrategy, buildContext } from 'graphql-passport';
@@ -16,7 +18,11 @@ require("dotenv").config();
 
 const startServer = async () => {
   const app = express();
-
+  
+  // GENERAL APP SETUP
+  app.use(express.json());
+  app.use(helmet());
+  
   // AUTHENTICATION
   passport.use( 
     new GraphQLLocalStrategy( async (username, password, done) => {
@@ -53,7 +59,6 @@ const startServer = async () => {
   app.use(passport.session());
 
 
-  app.use(express.json())
 
   // CORS SETUP
   const corsOptions = {
@@ -62,6 +67,7 @@ const startServer = async () => {
   }
   app.use(cors(corsOptions));
   
+
   // GRAPHQL + APOLLO SETUP
   const server = new ApolloServer({
     typeDefs,

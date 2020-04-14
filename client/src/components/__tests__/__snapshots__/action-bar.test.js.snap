@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActionBar /> Renders correctly 1`] = `
+<div
+  className="action-bar"
+>
+  <div
+    className="action-bar__container u-margin-top-medium"
+  >
+    <div
+      className="cta"
+    >
+      <span
+        className="cta__text"
+      >
+        test1
+      </span>
+    </div>
+    <div
+      className="cta"
+    >
+      <span
+        className="cta__text"
+      >
+        test2
+      </span>
+    </div>
+    <div
+      className="cta"
+    >
+      <span
+        className="cta__text"
+      >
+        test3
+      </span>
+    </div>
+  </div>
+</div>
+`;
