@@ -38,7 +38,7 @@ const Post = (post) => {
               isPost 
               userId={author.id}
               username={author.username} 
-              profileImgUrl={author.profilePicture} 
+              picture={author.profilePicture} 
             />
 
             <PostOptionsDropdown isHidden={dropdownHidden} postId={postId}/>

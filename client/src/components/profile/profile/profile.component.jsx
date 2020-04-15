@@ -7,7 +7,6 @@ import {default as ProfileActionBar} from '../../../containers/profile-action-ba
 import ProfileCoreInfo from '../profile-core-info/profile-core-info.component';
 
 const Profile = (props) => {
-  console.log(props)
   const { 
     userId, 
     isPost, 

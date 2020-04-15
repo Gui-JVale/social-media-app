@@ -25,7 +25,6 @@ export const resolvers = {
   },
   User: {
     isFollowedByCurrentUser: (user, _args, { cache }) => {
-      console.log(user)
       const { currentUser } = cache.readQuery({ query: GET_CURRENT_USER });
       if(!currentUser) return false;
 
