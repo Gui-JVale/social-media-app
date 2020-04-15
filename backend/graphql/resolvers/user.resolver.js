@@ -52,6 +52,7 @@ const userResolvers = {
         if(userToFollow) {
           if(userToFollow.followers.find(follower => follower.username === username )) {
             userToFollow.followers = userToFollow.followers.filter(follower => follower.username !== username);
+            currentUser.following = currentUser.following.filter(follower => follower.username !== userToFollow.username);
           } else {
             userToFollow.followers.push({
               id: currentUser._id,
