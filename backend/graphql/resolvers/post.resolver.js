@@ -35,6 +35,8 @@ const postResolvers = {
         const post = await Post.create({
           body,
           image,
+          likesCount: 0,
+          commentsCount: 0,
           author: {
             id: user._id,
             username: user.username,
@@ -79,16 +81,19 @@ const postResolvers = {
     },
     likePost: async (_, { postId }, context) => {
       try {
-        const { username } = context.getUser();
+        const { username, _id } = context.getUser();
         const post = await Post.findById(postId);
         if(post) {
           if(post.likes.find(like => like.username === username)) {
             post.likes = post.likes.filter(like => like.username !== username );
+            post.likesCount--;
           } else {
             post.likes.push({
+              id: _id,
               username,
-              cretedAt: new Date().toISOString()
+              createdAt: new Date().toISOString()
             });
+            post.likesCount++;
           }
           await post.save();
           return post;

@@ -59,7 +59,6 @@ const startServer = async () => {
   app.use(passport.session());
 
 
-
   // CORS SETUP
   const corsOptions = {
     origin: 'http://localhost:3000',

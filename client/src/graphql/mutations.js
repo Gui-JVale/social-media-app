@@ -7,6 +7,7 @@ mutation CreatePost ($body: String!){
     id
     body
     dropdownHidden @client
+    likesCount
     author {
       id
       username
@@ -25,6 +26,15 @@ export const EDIT_POST = gql`
         id
         username
       }
+    }
+  }
+`;
+
+export const LIKE_POST = gql`
+  mutation LikePost($postId: ID!) {
+    likePost(postId: $postId) {
+      id
+      likesCount
     }
   }
 `;

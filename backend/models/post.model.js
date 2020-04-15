@@ -4,6 +4,8 @@ const postSchema = new Schema({
   body: {type: String, required: true},
   image: String,
   createdAt: {type: Date, default: Date.now},
+  likesCount: Number,
+  commentsCount: Number,
   author: {
     id: {
       type: Schema.Types.ObjectId,
@@ -25,7 +27,7 @@ const postSchema = new Schema({
         ref: "User"
       },
       username: String,
-      image: String
+      createdAt: { type: String, default: Date.now }
     }
   ]
 });

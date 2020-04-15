@@ -24,6 +24,8 @@ const typeDefs = gql`
     body: String!
     image: String
     author: Author!
+    likesCount: Int!
+    commentsCount: Int!
     comments: [Comment]
     likes: [Likes]
   }
@@ -36,7 +38,6 @@ const typeDefs = gql`
   }
 
   type Likes {
-    id: ID!
     createdAt: String!
     username: String!
   }

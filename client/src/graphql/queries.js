@@ -18,6 +18,8 @@ export const GET_POSTS = gql`
       id
       body
       dropdownHidden @client
+      likesCount
+      commentsCount
       author {
         id
         username
