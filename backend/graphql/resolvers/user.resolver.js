@@ -1,4 +1,4 @@
-import { UserInputError } from 'apollo-server-express';
+import { UserInputError, AuthenticationError } from 'apollo-server-express';
 
 import User from '../../models/user.model'
 import { validateCreateUserInput, validateLoginInput } from '../../utils/validators';
@@ -27,9 +27,8 @@ const userResolvers = {
     }
   },
   Mutation: {
-    login: async (_, { username, password }, context) => {
+    login: async (_parent, { username, password }, context) => {
       try {
-        console.log("At least Tried")
         const { errors, valid } = validateLoginInput(username, password);
         if (!valid) {
           throw new UserInputError('Errors', { errors })
@@ -41,7 +40,30 @@ const userResolvers = {
         throw new Error(e)
       }
     },
-    logout: (_, __, context) => context.logout(), 
+    followUser: async (_parent, { userToFollowId }, context ) => {
+      try {
+        const currentUser = context.getUser();
+        if(!user) throw new AuthenticationError('You must be logged in to do that')
+        const { username } = currentUser;
+        
+        const userToFollow = await User.findById(userToFollowId);
+        if(userToFollow) {
+          if(userToFollow.followers.find(follower => follower.username === username )) {
+            userToFollow.followers = userToFollow.followers.filter(follower => follower.username !== username);
+          } else {
+            userToFollow.followers.push({
+              id: currentUser._id,
+              username,
+            })
+          }
+        } 
+
+      } catch(e) {
+        throw new Error(e);
+      }
+
+    },
+    logout: (_, __, context) => context.logout(),
     createUser: async (_, {
       createUserInput: { 
         username, 
@@ -81,7 +103,7 @@ const userResolvers = {
           picture,
           email, 
           password: hash,
-          createdAt: new Date()
+          createdAt: new Date(),
 
         });
 

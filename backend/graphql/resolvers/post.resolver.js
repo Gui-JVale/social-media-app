@@ -81,7 +81,12 @@ const postResolvers = {
     },
     likePost: async (_, { postId }, context) => {
       try {
-        const { username, _id } = context.getUser();
+        const user = context.getUser();
+
+        if(!user) throw new AuthenticationError("You must be logged in to do that!")
+
+        const { username, _id} = user;
+
         const post = await Post.findById(postId);
         if(post) {
           if(post.likes.find(like => like.username === username)) {

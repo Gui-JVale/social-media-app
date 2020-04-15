@@ -24,6 +24,11 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
   cache,
+  cacheRedirects: {
+    Query: {
+      getPostById: (_parent, { postId }, { getCacheKey }) => getCacheKey({ id: postId, __typename: 'Post'})
+    }
+  },
   link,
   typeDefs,
   resolvers

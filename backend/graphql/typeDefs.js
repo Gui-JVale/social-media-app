@@ -11,6 +11,8 @@ const typeDefs = gql`
     picture: String
     createdAt: String!
     posts: [Post]
+    followers: [User]
+    following: [User]
   }
 
   type Author {
@@ -68,6 +70,7 @@ const typeDefs = gql`
     createUser(createUserInput: CreateUserInput): User!
     login(username: String!, password: String!): User
     logout: Boolean
+    followUser( userToFollowId: ID!): User!
     createPost(body: String!, image: String): Post
     editPost(postId: ID!, body: String!): Post!
     deletePost(postId: ID!): Post!

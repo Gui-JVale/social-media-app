@@ -9,7 +9,18 @@ import MoreOptionsIcon from '../../general/more-options-icon/more-options-icon.c
 import { default as PostOptionsDropdown}  from '../../../containers/post-options-dropdown.container';
 
 
-const Post = ({ postId, body, author, likesCount, commentsCount, currentUserId, dropdownHidden, toggleDropdownHidden }) => {
+const Post = (post) => {
+  const { 
+    postId, 
+    body, 
+    author, 
+    likesCount, 
+    commentsCount, 
+    currentUserId, 
+    dropdownHidden, 
+    isLikedByCurrentUser, 
+    toggleDropdownHidden 
+  } = post;
   return (
     <div className="post">
        <ContentBox>
@@ -41,7 +52,10 @@ const Post = ({ postId, body, author, likesCount, commentsCount, currentUserId, 
             <div className="post__metrics">
               {likesCount} Likes and {commentsCount} Comments
             </div>
-            <PostActionBar postId={postId} />
+            <PostActionBar 
+              postId={postId} 
+              isLikedByCurrentUser={isLikedByCurrentUser}
+            />
           </footer>
 
       </ContentBox>

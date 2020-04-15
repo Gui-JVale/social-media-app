@@ -6,8 +6,6 @@ export const GET_CURRENT_USER = gql`
       id
       username
       picture
-      firstName
-      lastName
     }
   }
 `;
@@ -18,8 +16,12 @@ export const GET_POSTS = gql`
       id
       body
       dropdownHidden @client
+      isLikedByCurrentUser @client
       likesCount
       commentsCount
+      likes {
+        username
+      }
       author {
         id
         username
@@ -33,6 +35,7 @@ export const GET_POST_BY_ID = gql`
   query GetPostById($postId: ID!) {
     getPostById(postId: $postId) {
       body
+      isLikedByCurrentUser @client
     }
   }
 `;

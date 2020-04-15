@@ -8,6 +8,26 @@ const userSchema = new Schema({
   lastName: { type: String },
   picture: String,
   createdAt: { type: Date, default: Date.now },
+  followers: [
+    {
+      id: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
+      username: String,
+      profilePicture: String
+    }
+  ],
+  following: [
+    {
+      id: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      },
+      username: String,
+      profilePicture: String
+    }
+  ],
   posts: [
     {
       type: Schema.Types.ObjectId,
