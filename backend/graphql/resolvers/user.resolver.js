@@ -43,7 +43,9 @@ const userResolvers = {
     followUser: async (_parent, { userToFollowId }, context ) => {
       try {
         const currentUser = context.getUser();
-        if(!user) throw new AuthenticationError('You must be logged in to do that')
+        if(!currentUser) throw new AuthenticationError('You must be logged in to do that')
+        if(currentUser._id === userToFollowId) throw new Error('Can not follow yourself mate!');
+
         const { username } = currentUser;
         
         const userToFollow = await User.findById(userToFollowId);
@@ -54,9 +56,17 @@ const userResolvers = {
             userToFollow.followers.push({
               id: currentUser._id,
               username,
-            })
+            });
+            currentUser.following.push({
+              id: userToFollowId,
+              username: userToFollow.username
+            });
           }
         } 
+        await currentUser.save();
+        await userToFollow.save();
+
+        return userToFollow;
 
       } catch(e) {
         throw new Error(e);

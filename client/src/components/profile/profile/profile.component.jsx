@@ -3,24 +3,38 @@ import React from 'react';
 import './profile.styles.sass';
 
 import ProfilePicture from '../profile-picture/profile-picture.component';
-import ProfileActionBar from '../profile-action-bar/profile-action-bar.component';
+import {default as ProfileActionBar} from '../../../containers/profile-action-bar.container';
 import ProfileCoreInfo from '../profile-core-info/profile-core-info.component';
 
-const Profile = ({ isPost, big, username, profileImgUrl  }) => (
-  <div className="profile">
-    <div className="profile__identity">
-      <ProfilePicture big={big} imgUrl={profileImgUrl} />
-      <ProfileCoreInfo  username={username} big={big}/>
-    </div>
+const Profile = (props) => {
+  console.log(props)
+  const { 
+    userId, 
+    isPost, 
+    big, 
+    username, 
+    picture, 
+    isFollowedByCurrentUser 
+  } = props;
 
-    {!isPost ? (
-      <div className="profile__general">
-        <ProfileActionBar /> 
-        <div className="profile__bio">Bio</div>
+  return (
+    <div className="profile">
+      <div className="profile__identity">
+        <ProfilePicture big={big} imgUrl={picture} />
+        <ProfileCoreInfo  userId={userId} username={username} big={big}/>
       </div>
-    ) : null}
-    
-  </div>
-);
+  
+      {!isPost ? (
+        <div className="profile__general">
+          <ProfileActionBar userId={userId} isFollowedByCurrentUser={isFollowedByCurrentUser} /> 
+          <div className="profile__bio">Bio</div>
+        </div>
+      ) : null}
+      
+    </div>
+  );
+
+}
+
 
 export default Profile;

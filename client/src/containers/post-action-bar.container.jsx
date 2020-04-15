@@ -10,11 +10,9 @@ const PostActionBarContainer = ({ postId, ...rest}) => {
   const [likePost] = useMutation(LIKE_POST, {
     variables: { postId },
     update(cache) {
-      console.log(cache);
       const { posts } = cache.readQuery({
         query: GET_POSTS,
       })
-
       const updatedPosts = posts.map(post => post.id === postId ? {...post, isLikedByCurrentUser: !post.isLikedByCurrentUser} : post);
 
       cache.writeQuery({

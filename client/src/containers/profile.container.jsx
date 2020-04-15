@@ -7,7 +7,7 @@ import Spinner from '../components/atoms/spinner/spinner.component';
 import Profile from '../components/profile/profile/profile.component';
 
 
-const ProfileContainer = ({ match, big }) => {
+const ProfileContainer = ({ match, ...rest }) => {
   const {loading, error, data } = useQuery(GET_USER_BY_ID, {
     variables: { userId: match.params.userId },
   });
@@ -15,9 +15,9 @@ const ProfileContainer = ({ match, big }) => {
   if(loading) return <Spinner />
   if(error) return <p>Error: {error}</p>
 
-  const { username, picture } = data.getUserById;
+  // const { username, picture } = data.getUserById;
 
-  return <Profile username={username} profileImgUrl={picture} big={big} />
+  return <Profile userId={match.params.userId} {...data.getUserById} {...rest}  />
 };
 
 export default ProfileContainer;

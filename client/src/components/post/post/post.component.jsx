@@ -36,6 +36,7 @@ const Post = (post) => {
 
             <Profile
               isPost 
+              userId={author.id}
               username={author.username} 
               profileImgUrl={author.profilePicture} 
             />

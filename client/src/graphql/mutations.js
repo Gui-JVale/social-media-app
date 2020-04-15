@@ -1,6 +1,9 @@
 import  { gql } from 'apollo-boost';
-
+//=============================
 // BACKEND MUTATIONS
+//=============================
+
+// Post Mutations
 export const CREATE_POST = gql`
 mutation CreatePost ($body: String!){
   createPost (body: $body image: "img") {
@@ -47,7 +50,19 @@ export const DELETE_POST = gql`
   }
 `;
 
+// User Mutations
+export const FOLLOW_USER = gql`
+  mutation FollowUser($userToFollowId: ID!) {
+    followUser(userToFollowId: $userToFollowId) {
+      id
+      username
+    }
+  }
+`;
+
+//=============================
 // CLIENT MUTATIONS
+//=============================
 export const TOGGLE_DROPDOWN_HIDDEN = gql`
   mutation ToggleDropdownHidden($id: Int!) {
     toggleDropdownHidden(id: $id) @client

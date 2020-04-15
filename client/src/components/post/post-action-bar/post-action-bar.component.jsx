@@ -11,7 +11,7 @@ const PostActionBar = ({ likePost, isLikedByCurrentUser }) => {
       <ActionBar>
         <Cta 
           Icon={ThumbUpAlt}
-          text="Like"
+          text={isLikedByCurrentUser ? "Liked" : "Like"}
           onClick={likePost}
           isActive={isLikedByCurrentUser}
         />

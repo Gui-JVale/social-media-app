@@ -4,6 +4,11 @@ import { GET_CURRENT_USER } from './queries';
 export const typeDefs = gql`
   extend type Post {
     dropdownHidden: Boolean!
+    isLikedByCurrentUser: Boolean!
+  }
+
+  extend type User {
+    isFollowedByCurrentUser: Boolean!
   }
 `;
 
@@ -11,11 +16,20 @@ export const typeDefs = gql`
 export const resolvers = {
   Post: {
     dropdownHidden: () => true,
-    isLikedByCurrentUser: (post, _args, { cache }, _info ) => {
-      const {currentUser} = cache.readQuery({ query: GET_CURRENT_USER } );
+    isLikedByCurrentUser: (post, _args, { cache }) => {
+      const { currentUser } = cache.readQuery({ query: GET_CURRENT_USER });
       if(!currentUser) return false;
 
-      return post.likes.find(user => user.username === currentUser.username) ? true : false;
+      return !!post.likes.find(user => user.username === currentUser.username);
+    }
+  },
+  User: {
+    isFollowedByCurrentUser: (user, _args, { cache }) => {
+      console.log(user)
+      const { currentUser } = cache.readQuery({ query: GET_CURRENT_USER });
+      if(!currentUser) return false;
+
+      return !!user.followers.find(follower => follower.username === currentUser.username);
     }
   },
 

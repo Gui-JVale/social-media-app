@@ -45,6 +45,10 @@ export const GET_USER_BY_ID = gql`
     getUserById (userId: $userId) {
       username
       picture
+      isFollowedByCurrentUser @client
+      followers {
+        username
+      }
     }
   }
 `;
