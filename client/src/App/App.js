@@ -12,6 +12,7 @@ import Footer from '../components/layout/footer/footer.component';
 import AuthPage from '../pages/auth/auth.component';
 import SubmitPostPage from '../pages/submit-post/submit-post.component';
 import PrivateRoute from '../components/general/private-route/private-route.component';
+import PostPage from '../pages/post/post.component';
 
 
 function App({ currentUser }) {
@@ -26,7 +27,7 @@ function App({ currentUser }) {
 
           <PrivateRoute path="/create-post" component={SubmitPostPage} currentUser={currentUser} />
 
-          <PrivateRoute path="/posts/:postId/edit" component={SubmitPostPage} currentUser={currentUser} />
+          <PrivateRoute path="/posts/:postId" component={PostPage} currentUser={currentUser} />
 
           <Route path="/auth" component={AuthPage} />  
         </Switch>

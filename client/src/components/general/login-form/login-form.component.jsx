@@ -44,7 +44,7 @@ const LoginForm = ({ login, history }) => {
           label="Password"
           required />
         <div className="button">
-          <button  type="submit" >Login</button>
+          <button  type="submit">Login</button>
         </div>
       </form>
 

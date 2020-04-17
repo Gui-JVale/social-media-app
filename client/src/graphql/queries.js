@@ -40,6 +40,19 @@ export const GET_POST_BY_ID = gql`
   }
 `;
 
+export const GET_POST_COMMENTS = gql`
+  query GetPostComments($postId: ID!) {
+    getPostComments(postId: $postId) {
+      id
+      body
+      author {
+        username
+        profilePicture
+      } 
+    }
+  }
+`;
+
 export const GET_USER_BY_ID = gql`
   query getUserById($userId: ID!) {
     getUserById (userId: $userId) {

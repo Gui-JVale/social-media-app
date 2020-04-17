@@ -23,6 +23,18 @@ const postResolvers = {
       }catch(err) {
         throw new Error(err);
       }
+    },
+    getPostComments: async (_, {postId}) => {
+      try{
+        const post = await Post.findById(postId).populate('comments');
+        if(post) {
+          return post.comments;
+        } else {
+          throw new Error('Post not found')
+        }
+      }catch(e) {
+        throw new Error(e);
+      }
     }
   },
   Mutation : {

@@ -1,13 +1,14 @@
 import mongoose, { Schema } from 'mongoose';
 
 const commentSchema = new Schema({
-  text: {type: String, required: true},
+  body: {type: String, required: true},
   author: {
     id: {
       type: Schema.Types.ObjectId,
       ref: "User"
     },
-    username: String
+    username: String,
+    profilePicture: String
   }
 });
 

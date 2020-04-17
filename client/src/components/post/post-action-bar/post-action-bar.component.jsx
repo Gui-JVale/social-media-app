@@ -5,7 +5,7 @@ import { ThumbUpAlt, ChatBubbleOutline, KeyboardTab } from '@material-ui/icons'
 import ActionBar from '../../general/action-bar/action-bar.component';
 import Cta from '../../general/cta/cta.component';
 
-const PostActionBar = ({ likePost, isLikedByCurrentUser }) => {
+const PostActionBar = ({ likePost, isLikedByCurrentUser, postId }) => {
   return (
     <div className="post__action-bar">
       <ActionBar>
@@ -18,6 +18,7 @@ const PostActionBar = ({ likePost, isLikedByCurrentUser }) => {
         <Cta 
           Icon={ChatBubbleOutline}
           text="Comment"
+          link={`/posts/${postId}/comments`}
         />
         <Cta 
           Icon={KeyboardTab}

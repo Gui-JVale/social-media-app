@@ -7,6 +7,7 @@ import PostActionBar from '../components/post/post-action-bar/post-action-bar.co
 import { GET_POSTS } from '../graphql/queries';
 
 const PostActionBarContainer = ({ postId, ...rest}) => {
+
   const [likePost] = useMutation(LIKE_POST, {
     variables: { postId },
     update(cache) {
@@ -25,7 +26,7 @@ const PostActionBarContainer = ({ postId, ...rest}) => {
     }
   });
 
-  return <PostActionBar likePost={likePost} {...rest} />
+  return <PostActionBar likePost={likePost}  postId={postId} {...rest}  />
 }
 
 export default PostActionBarContainer;

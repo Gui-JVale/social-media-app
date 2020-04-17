@@ -36,7 +36,7 @@ const typeDefs = gql`
     id: ID!
     body: String!
     createdAt: String
-    username: String
+    author: Author!
   }
 
   type Likes {
@@ -64,6 +64,7 @@ const typeDefs = gql`
     getUserById(userId: ID!): User
     posts: [Post!]!
     getPostById(postId: ID!): Post
+    getPostComments(postId: ID!): [Comment]!
   }
 
   type Mutation {

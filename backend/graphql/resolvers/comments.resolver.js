@@ -1,12 +1,13 @@
 import { UserInputError, AuthenticationError } from 'apollo-server-express';
 
 import Post from '../../models/post.model';
+import Comment from '../../models/comment.model';
 
 const commentResolvers = {
   Mutation: {
     createComment: async (_, { postId, body }, context ) => {
       try {
-        const { username } = context.getUser();
+        const user = await context.getUser();
         if(body.trim() === '') {
           throw new UserInputError("Empty Comment"),  {
             errors: {
@@ -17,11 +18,15 @@ const commentResolvers = {
 
         const post = await Post.findById(postId)
         if (post) {
-          post.comments.unshift({
+          const comment = await Comment.create({
             body,
-            username,
-            createdAt: new Date().toISOString()
-          })
+            author: {
+              id: user._id,
+              username: user.username,
+              profilePicture: user.picture
+            }
+          });
+          post.comments.push(comment)
           await post.save();
           return post;
         } else {
@@ -30,7 +35,6 @@ const commentResolvers = {
 
       } catch(e) {
         throw new Error(e);
-        
       }
     },
 
