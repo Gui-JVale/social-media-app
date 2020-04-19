@@ -31,7 +31,7 @@ const client = new ApolloClient({
   },
   link,
   typeDefs,
-  resolvers
+  resolvers,
 });
 
 

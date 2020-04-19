@@ -5,7 +5,7 @@ import useFormFields from '../../../hooks/use-form-fields';
 import FormInput from '../../atoms/form-input/form-input.component';
 
 const SubmitPostForm = ({ onSubmit, post }) => {
-  const initialState = post ? {body: post.body} : {body: ''};
+  const initialState = post ? { body: post.body } : {body: ''};
   const { handleChange, values } = useFormFields(initialState)
 
   const handleSubmit = async e => {
@@ -18,7 +18,7 @@ const SubmitPostForm = ({ onSubmit, post }) => {
   };
 
   return (
-    <div className="create-post-form">
+    <div className="submit-post-form" id="submit-post-form">
       <form onSubmit={handleSubmit} className="form">
         <FormInput
           name="body"
@@ -29,7 +29,7 @@ const SubmitPostForm = ({ onSubmit, post }) => {
           required 
         />
         <div className="button">
-          <button  type="submit">Post</button>
+          <button type="submit">Post</button>
         </div>
       </form>
     </div>

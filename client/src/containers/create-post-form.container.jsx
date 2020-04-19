@@ -9,15 +9,15 @@ import SubmitPostForm from '../components/post/submit-post-form/submit-post-form
 
 const CreatePostContainer = ({ history }) => {
   const [createPost] = useMutation(CREATE_POST, {
-    update(cache, {data: { createPost }}) {
+    update(cache, { data: { createPost } }) {
       const { posts } = cache.readQuery({ query: GET_POSTS })
       cache.writeData({
         query: GET_POSTS,
-        data: { posts: posts.push(createPost)}
-      })
+        data: { posts: posts.push(createPost) }
+      });
       return history.push('/')
     }
-  })
+  });
 
   return <SubmitPostForm onSubmit={body => createPost({ variables: { body }})} />
 

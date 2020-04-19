@@ -50,6 +50,19 @@ export const DELETE_POST = gql`
   }
 `;
 
+export const CREATE_COMMENT = gql`
+  mutation CreateComment($postId: ID! $body: String!) {
+    createComment(postId: $postId body: $body) {
+      id
+      body
+      author {
+        username
+        profilePicture
+      }
+    }
+  }
+`;
+
 // User Mutations
 export const LOGIN_USER = gql`
   mutation Login($username: String, $password: String) {

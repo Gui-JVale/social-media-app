@@ -8,16 +8,14 @@ import Profile from '../components/profile/profile/profile.component';
 
 
 const ProfileContainer = ({ match, ...rest }) => {
-  const {loading, error, data } = useQuery(GET_USER_BY_ID, {
+  const { loading, error, data } = useQuery(GET_USER_BY_ID, {
     variables: { userId: match.params.userId },
   });
 
   if(loading) return <Spinner />
-  if(error) return <p>Error: {error}</p>
-
-  // const { username, picture } = data.getUserById;
-
-  return <Profile userId={match.params.userId} {...data.getUserById} {...rest}  />
+  if(error) return <p>Error, <br/>{error.message}</p>
+  
+  return <Profile userId={match.params.userId} {...data.getUserById} {...rest} />
 };
 
 export default ProfileContainer;

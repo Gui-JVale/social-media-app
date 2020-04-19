@@ -28,7 +28,7 @@ const commentResolvers = {
           });
           post.comments.push(comment)
           await post.save();
-          return post;
+          return comment;
         } else {
           throw new UserInputError("Post not found")
         }

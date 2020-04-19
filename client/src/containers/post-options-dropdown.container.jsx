@@ -12,11 +12,11 @@ const PostOptionsDropdownContainer = ({ postId, ...props }) => {
   const [deletePost] = useMutation(DELETE_POST, { 
     variables: { postId },
     update(cache,{ data: { deletePost }}) {
-      const { posts } = cache.readQuery({query: GET_POSTS});
-      cache.writeData({
+      const { posts } = cache.readQuery({ query: GET_POSTS })
+      cache.writeQuery({
         query: GET_POSTS,
         data: { posts: posts.filter(post => post.id !== deletePost.id)}
-      })
+      });
     }
   });
   const [toggleDropdownHidden] = useMutation(TOGGLE_DROPDOWN_HIDDEN, {variables: { postId }})

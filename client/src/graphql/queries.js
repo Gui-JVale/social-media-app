@@ -54,13 +54,14 @@ export const GET_POST_COMMENTS = gql`
 `;
 
 export const GET_USER_BY_ID = gql`
-  query getUserById($userId: ID!) {
+  query GetUserById($userId: ID!) {
     getUserById (userId: $userId) {
       username
       picture
       isFollowedByCurrentUser @client
       followers {
         username
+        picture
       }
     }
   }
