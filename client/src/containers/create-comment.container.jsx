@@ -16,6 +16,7 @@ const CreateCommentContainer = ({ match }) => {
         variables: { postId: match.params.postId } 
       });
       console.log(getPostComments)
+      console.log(getPostComments.concat([createComment]))
       cache.writeQuery({
         query: GET_POST_COMMENTS,
         data: { getPostComments: getPostComments.concat([createComment]) }

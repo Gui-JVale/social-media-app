@@ -10,10 +10,16 @@ import SubmitPostForm from '../components/post/submit-post-form/submit-post-form
 const CreatePostContainer = ({ history }) => {
   const [createPost] = useMutation(CREATE_POST, {
     update(cache, { data: { createPost } }) {
+      const newPost = {
+        ...createPost,
+        commentsCount: 0,
+        isLikedByCurrentUser: false,
+        likes: []
+      }
       const { posts } = cache.readQuery({ query: GET_POSTS })
       cache.writeData({
         query: GET_POSTS,
-        data: { posts: posts.push(createPost) }
+        data: { posts: posts.concat([newPost]) }
       });
       return history.push('/')
     }
