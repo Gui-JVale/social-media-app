@@ -1,7 +1,7 @@
-import  { gql } from 'apollo-boost';
-//=============================
+import { gql } from 'apollo-boost';
+//= ============================
 // BACKEND MUTATIONS
-//=============================
+//= ============================
 
 // Post Mutations
 export const CREATE_POST = gql`
@@ -82,9 +82,9 @@ export const FOLLOW_USER = gql`
   }
 `;
 
-//=============================
+//= ============================
 // CLIENT MUTATIONS
-//=============================
+//= ============================
 export const TOGGLE_POST_DROPDOWN_HIDDEN = gql`
   mutation ToggleDropdownHidden($id: Int!) {
     togglePostDropdownHidden(id: $id) @client

@@ -6,10 +6,10 @@ import renderer from 'react-test-renderer';
 import Cta from '../general/cta/cta.component';
 import ActionBar from '../general/action-bar/action-bar.component';
 
-describe('<ActionBar />',  () => {
+describe('<ActionBar />', () => {
   let wrapper = null;
   let container = null;
-  let tree = null
+  let tree = null;
 
   beforeEach(() => {
     // setup a DOM element as a render target
@@ -19,31 +19,30 @@ describe('<ActionBar />',  () => {
     // setup component for test
     wrapper = shallow(
       <ActionBar>
-        <Cta  text="test1"/>
-        <Cta  text="test2"/>
-        <Cta  text="test3"/>
-      </ActionBar>
+        <Cta text="test1" />
+        <Cta text="test2" />
+        <Cta text="test3" />
+      </ActionBar>,
     );
     tree = renderer
       .create(
         <ActionBar>
-          <Cta  text="test1"/>
-          <Cta  text="test2"/>
-          <Cta  text="test3"/>
-        </ActionBar>
+          <Cta text="test1" />
+          <Cta text="test2" />
+          <Cta text="test3" />
+        </ActionBar>,
       )
       .toJSON();
-
   });
 
   afterEach(() => {
     // cleanup on exiting
     unmountComponentAtNode(container);
     container.remove();
-    container = null
+    container = null;
   });
 
   it('Renders correctly', () => {
     expect(tree).toMatchSnapshot();
   });
-})
+});
