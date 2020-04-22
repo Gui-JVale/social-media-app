@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation,  } from '@apollo/react-hooks';
 
-import { DELETE_POST, TOGGLE_DROPDOWN_HIDDEN } from '../graphql/mutations';
+import { DELETE_POST, TOGGLE_POST_DROPDOWN_HIDDEN } from '../graphql/mutations';
 import { GET_POSTS } from '../graphql/queries';
 
 import PostOptionsDropdown from '../components/post/post-options-dropdown/post-options-dropdown.component';
@@ -19,12 +19,12 @@ const PostOptionsDropdownContainer = ({ postId, ...props }) => {
       });
     }
   });
-  const [toggleDropdownHidden] = useMutation(TOGGLE_DROPDOWN_HIDDEN, {variables: { postId }})
+  const [togglePostDropdownHidden] = useMutation(TOGGLE_POST_DROPDOWN_HIDDEN, {variables: { postId }})
 
   return (
     <PostOptionsDropdown 
       deletePost={deletePost} 
-      toggleHidden={toggleDropdownHidden}
+      toggleHidden={togglePostDropdownHidden}
       postId={postId}
       {...props} 
     />

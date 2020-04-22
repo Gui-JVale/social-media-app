@@ -10,13 +10,10 @@ import SubmitCommentForm from '../components/general/submit-comment-form/submit-
 const CreateCommentContainer = ({ match }) => {
   const [createComment] = useMutation(CREATE_COMMENT, {
     update(cache, { data: { createComment }}) {
-      console.log(createComment)
       const { getPostComments } = cache.readQuery({ 
         query: GET_POST_COMMENTS, 
         variables: { postId: match.params.postId } 
       });
-      console.log(getPostComments)
-      console.log(getPostComments.concat([createComment]))
       cache.writeQuery({
         query: GET_POST_COMMENTS,
         data: { getPostComments: getPostComments.concat([createComment]) }

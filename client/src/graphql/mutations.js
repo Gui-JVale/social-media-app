@@ -85,8 +85,14 @@ export const FOLLOW_USER = gql`
 //=============================
 // CLIENT MUTATIONS
 //=============================
-export const TOGGLE_DROPDOWN_HIDDEN = gql`
+export const TOGGLE_POST_DROPDOWN_HIDDEN = gql`
   mutation ToggleDropdownHidden($id: Int!) {
-    toggleDropdownHidden(id: $id) @client
+    togglePostDropdownHidden(id: $id) @client
+  }
+`;
+
+export const TOGGLE_COMMENT_DROPDOWN_HIDDEN = gql`
+  mutation ToggleDropdownHidden($id: Int!) {
+    toggleCommentDropdownHidden(id: $id) @client
   }
 `;

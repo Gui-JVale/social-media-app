@@ -45,6 +45,7 @@ export const GET_POST_COMMENTS = gql`
     getPostComments(postId: $postId) {
       id
       body
+      dropdownHidden @client
       author {
         username
         profilePicture

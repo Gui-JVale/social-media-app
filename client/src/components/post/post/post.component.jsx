@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './post.styles.sass';
 
@@ -19,7 +19,7 @@ const Post = (post) => {
     currentUserId, 
     dropdownHidden, 
     isLikedByCurrentUser, 
-    toggleDropdownHidden 
+    togglePostDropdownHidden 
   } = post;
   return (
     <div className="post">
@@ -30,7 +30,7 @@ const Post = (post) => {
               <MoreOptionsIcon 
                 iconWrapperClassName="post__more-options"
                 style={{ fontSize: 20 }}
-                onClick={toggleDropdownHidden}
+                onClick={togglePostDropdownHidden}
               />
             ) : null}
 

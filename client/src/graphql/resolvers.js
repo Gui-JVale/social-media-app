@@ -7,6 +7,10 @@ export const typeDefs = gql`
     isLikedByCurrentUser: Boolean!
   }
 
+  extend type Comment {
+    dropdownHidden: Boolean!
+  }
+
   extend type User {
     isFollowedByCurrentUser: Boolean!
   }
@@ -31,9 +35,12 @@ export const resolvers = {
       return !!user.followers.find(follower => follower.username === currentUser.username);
     }
   },
+  Comment: {
+    dropdownHidden: () => true,
+  },
 
   Mutation: {
-    toggleDropdownHidden: (_parent, variables, { cache, getCacheKey }) => {
+    togglePostDropdownHidden: (_parent, variables, { cache, getCacheKey }) => {
       const id = getCacheKey({ __typename: 'Post', id: variables.id});
       const  fragment = gql`
         fragment dropdownHidden on Post {
@@ -44,6 +51,18 @@ export const resolvers = {
       const data = {...postFragment, dropdownHidden: !postFragment.dropdownHidden}
       cache.writeData({ id, data })
       return data.dropdownHidden;
-    }
+    },
+    toggleCommentDropdownHidden: (_parent, variables, { cache, getCacheKey }) => {
+      const id = getCacheKey({ __typename: 'Comment', id: variables.id});
+      const  fragment = gql`
+        fragment dropdownHidden on Comment {
+          dropdownHidden
+        }
+      `;
+      const commentFragment = cache.readFragment({ fragment, id });
+      const data = {...commentFragment, dropdownHidden: !commentFragment.dropdownHidden}
+      cache.writeData({ id, data })
+      return data.dropdownHidden;
+    },
   }
 }

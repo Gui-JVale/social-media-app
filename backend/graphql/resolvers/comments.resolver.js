@@ -27,6 +27,7 @@ const commentResolvers = {
             }
           });
           post.comments.push(comment)
+          post.commentsCount++
           await post.save();
           return comment;
         } else {
@@ -37,6 +38,31 @@ const commentResolvers = {
         throw new Error(e);
       }
     },
+
+    editComment: async (_, { postId, commentId, body }, context) => {
+      try {
+        const { username } = context.getUser();
+        const post = await Post.findById(postId);
+        if(post) {
+          const comment = await Comment.findById(commentId);
+          if(comment) {
+            if(comment.author.username === username) {
+              await comment.update(body);
+              await comment.save();
+              return comment;
+            } else {
+              throw new AuthenticationError('Your not allowed to do that')
+            }
+          } else {
+            throw new Error('Comment not found');
+          }
+        } else {
+          throw new Error('Post not found')
+        }
+      } catch(e) {
+        throw new Error(e);
+      }
+    }, 
 
     deleteComment: async (_, { postId, commentId }, context ) => {
       try{

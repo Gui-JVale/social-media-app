@@ -76,6 +76,7 @@ const typeDefs = gql`
     editPost(postId: ID!, body: String!): Post!
     deletePost(postId: ID!): Post!
     createComment(postId: ID!, body: String!): Comment!
+    editComment(postId: ID!, commentId: ID!, body: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!
     likePost(postId: ID!): Post!
   }
