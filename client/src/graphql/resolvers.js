@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { GET_CURRENT_USER } from './queries';
+import { GET_CURRENT_USER, CLIENT__GET_CURRENT_COMMENT } from './queries';
 
 export const typeDefs = gql`
   extend type Post {
@@ -14,8 +14,11 @@ export const typeDefs = gql`
   extend type User {
     isFollowedByCurrentUser: Boolean!
   }
-`;
 
+  extend type Mutation {
+    setCurrentCommentBody(body: String!): String!
+  }
+`;
 
 export const resolvers = {
   Post: {
@@ -24,7 +27,9 @@ export const resolvers = {
       const { currentUser } = cache.readQuery({ query: GET_CURRENT_USER });
       if (!currentUser) return false;
 
-      return !!post.likes.find((user) => user.username === currentUser.username);
+      return !!post.likes.find(
+        (user) => user.username === currentUser.username
+      );
     },
   },
   User: {
@@ -32,7 +37,9 @@ export const resolvers = {
       const { currentUser } = cache.readQuery({ query: GET_CURRENT_USER });
       if (!currentUser) return false;
 
-      return !!user.followers.find((follower) => follower.username === currentUser.username);
+      return !!user.followers.find(
+        (follower) => follower.username === currentUser.username
+      );
     },
   },
   Comment: {
@@ -48,11 +55,19 @@ export const resolvers = {
         }
       `;
       const postFragment = cache.readFragment({ fragment, id });
-      const data = { ...postFragment, dropdownHidden: !postFragment.dropdownHidden };
+      const data = {
+        ...postFragment,
+        dropdownHidden: !postFragment.dropdownHidden,
+      };
       cache.writeData({ id, data });
       return data.dropdownHidden;
     },
-    toggleCommentDropdownHidden: (_parent, variables, { cache, getCacheKey }) => {
+
+    toggleCommentDropdownHidden: (
+      _parent,
+      variables,
+      { cache, getCacheKey }
+    ) => {
       const id = getCacheKey({ __typename: 'Comment', id: variables.id });
       const fragment = gql`
         fragment dropdownHidden on Comment {
@@ -60,9 +75,28 @@ export const resolvers = {
         }
       `;
       const commentFragment = cache.readFragment({ fragment, id });
-      const data = { ...commentFragment, dropdownHidden: !commentFragment.dropdownHidden };
+      const data = {
+        ...commentFragment,
+        dropdownHidden: !commentFragment.dropdownHidden,
+      };
       cache.writeData({ id, data });
       return data.dropdownHidden;
+    },
+    setCurrentComment: (_, { body, commentId }, { cache }) => {
+      cache.writeQuery({
+        query: CLIENT__GET_CURRENT_COMMENT,
+        data: {
+          currentComment: {
+            body,
+            commentId,
+          },
+        },
+      });
+
+      return {
+        body,
+        commentId,
+      };
     },
   },
 };

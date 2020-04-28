@@ -3,20 +3,39 @@ import { gql } from 'apollo-boost';
 // BACKEND MUTATIONS
 //= ============================
 
-// Post Mutations
-export const CREATE_POST = gql`
-mutation CreatePost ($body: String!){
-  createPost (body: $body image: "img") {
-    id
-    body
-    dropdownHidden @client
-    likesCount
-    author {
+// User Mutations
+export const LOGIN_USER = gql`
+  mutation Login($username: String, $password: String) {
+    login(username: $username, password: $password) {
       id
       username
     }
   }
-}
+`;
+
+export const FOLLOW_USER = gql`
+  mutation FollowUser($userToFollowId: ID!) {
+    followUser(userToFollowId: $userToFollowId) {
+      id
+      username
+    }
+  }
+`;
+
+// Post Mutations
+export const CREATE_POST = gql`
+  mutation CreatePost($body: String!) {
+    createPost(body: $body, image: "img") {
+      id
+      body
+      dropdownHidden @client
+      likesCount
+      author {
+        id
+        username
+      }
+    }
+  }
 `;
 
 export const EDIT_POST = gql`
@@ -50,9 +69,10 @@ export const DELETE_POST = gql`
   }
 `;
 
+// Comments mutations
 export const CREATE_COMMENT = gql`
-  mutation CreateComment($postId: ID! $body: String!) {
-    createComment(postId: $postId body: $body) {
+  mutation CreateComment($postId: ID!, $body: String!) {
+    createComment(postId: $postId, body: $body) {
       id
       body
       author {
@@ -63,21 +83,23 @@ export const CREATE_COMMENT = gql`
   }
 `;
 
-// User Mutations
-export const LOGIN_USER = gql`
-  mutation Login($username: String, $password: String) {
-    login(username: $username, password: $password) {
+export const EDIT_COMMENT = gql`
+  mutation EditComment($postId: ID!, $commentId: ID!, $body: String!) {
+    editComment(postId: $postId, commentId: $commentId, body: $body) {
       id
-      username
+      body
+      author {
+        username
+        profilePicture
+      }
     }
   }
 `;
 
-export const FOLLOW_USER = gql`
-  mutation FollowUser($userToFollowId: ID!) {
-    followUser(userToFollowId: $userToFollowId) {
+export const DELETE_COMMENT = gql`
+  mutation DeleteComment($postId: ID!, $commentId: ID!) {
+    deleteComment(postId: $postId, commentId: $commentId) {
       id
-      username
     }
   }
 `;
@@ -94,5 +116,11 @@ export const TOGGLE_POST_DROPDOWN_HIDDEN = gql`
 export const TOGGLE_COMMENT_DROPDOWN_HIDDEN = gql`
   mutation ToggleDropdownHidden($id: Int!) {
     toggleCommentDropdownHidden(id: $id) @client
+  }
+`;
+
+export const CLIENT__SET_CURRENT_COMMENT = gql`
+  mutation SetCurrentComment($body: String!, $commentId: ID!) {
+    setCurrentComment(body: $body, commentId: $commentId) @client
   }
 `;

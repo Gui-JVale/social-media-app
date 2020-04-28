@@ -1,7 +1,6 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
-
   type User {
     id: ID!
     username: String
@@ -71,13 +70,13 @@ const typeDefs = gql`
     createUser(createUserInput: CreateUserInput): User!
     login(username: String!, password: String!): User
     logout: Boolean
-    followUser( userToFollowId: ID!): User!
+    followUser(userToFollowId: ID!): User!
     createPost(body: String!, image: String): Post
     editPost(postId: ID!, body: String!): Post!
     deletePost(postId: ID!): Post!
     createComment(postId: ID!, body: String!): Comment!
     editComment(postId: ID!, commentId: ID!, body: String!): Post!
-    deleteComment(postId: ID!, commentId: ID!): Post!
+    deleteComment(postId: ID!, commentId: ID!): Comment!
     likePost(postId: ID!): Post!
   }
 `;

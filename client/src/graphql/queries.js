@@ -1,5 +1,6 @@
 import { gql } from 'apollo-boost';
 
+// User Queries
 export const GET_CURRENT_USER = gql`
   query GetCurrentUser {
     currentUser {
@@ -10,6 +11,21 @@ export const GET_CURRENT_USER = gql`
   }
 `;
 
+export const GET_USER_BY_ID = gql`
+  query GetUserById($userId: ID!) {
+    getUserById(userId: $userId) {
+      username
+      picture
+      isFollowedByCurrentUser @client
+      followers {
+        username
+        picture
+      }
+    }
+  }
+`;
+
+// Post Queries
 export const GET_POSTS = gql`
   query Posts {
     posts {
@@ -49,21 +65,24 @@ export const GET_POST_COMMENTS = gql`
       author {
         username
         profilePicture
-      } 
+      }
     }
   }
 `;
 
-export const GET_USER_BY_ID = gql`
-  query GetUserById($userId: ID!) {
-    getUserById (userId: $userId) {
-      username
-      picture
-      isFollowedByCurrentUser @client
-      followers {
-        username
-        picture
-      }
+export const GET_COMMENT_BY_ID = gql`
+  query GetCommentById($commentId: ID!) {
+    getCommentById(commentId: $commentId) {
+      body
     }
+  }
+`;
+
+//= ============================
+// CLIENT QUERIES
+//= ============================
+export const CLIENT__GET_CURRENT_COMMENT = gql`
+  query GetCurrentComment {
+    currentComment @client
   }
 `;

@@ -4,24 +4,24 @@ import useFormFields from '../../../hooks/use-form-fields';
 
 import FormInput from '../../atoms/form-input/form-input.component';
 
-
-const SubmitCommentForm = ({ onSubmit, post }) => {
-  const initialState = { body: ''}
+const SubmitCommentForm = ({ onSubmit, comment }) => {
+  const initialState = comment ? { body: comment } : { body: '' };
   const { handleChange, values } = useFormFields(initialState);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      await onSubmit(values.body)
-    } catch(e) {
-      console.log(e)
+      await onSubmit(values.body);
+      return (values.body = '');
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   return (
     <div className="submit-comment-form">
       <form onSubmit={handleSubmit}>
-        <FormInput 
+        <FormInput
           name="body"
           type="textarea"
           value={values.body}
@@ -34,7 +34,7 @@ const SubmitCommentForm = ({ onSubmit, post }) => {
         </div>
       </form>
     </div>
-  )
+  );
 };
 
 export default SubmitCommentForm;

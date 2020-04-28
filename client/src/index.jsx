@@ -26,7 +26,8 @@ const client = new ApolloClient({
   cache,
   cacheRedirects: {
     Query: {
-      getPostById: (_parent, { postId }, { getCacheKey }) => getCacheKey({ id: postId, __typename: 'Post' }),
+      getPostById: (_parent, { postId }, { getCacheKey }) =>
+        getCacheKey({ id: postId, __typename: 'Post' }),
     },
   },
   link,
@@ -34,13 +35,9 @@ const client = new ApolloClient({
   resolvers,
 });
 
-
 client.writeData({
   data: {
-    networkStatus: {
-      __typename: 'NetworkStatus',
-      isConnected: false,
-    },
+    currentComment: null,
   },
 });
 
@@ -52,5 +49,5 @@ ReactDOM.render(
       </React.StrictMode>
     </BrowserRouter>
   </ApolloProvider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

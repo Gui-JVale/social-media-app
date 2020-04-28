@@ -9,25 +9,24 @@ import { default as CreatePostForm } from '../../containers/create-post-form.con
 import { default as EditPostForm } from '../../containers/edit-post-form.container';
 
 const SubmitPostPage = ({ match }) => {
-  const {loading, error, data} = useQuery(GET_CURRENT_USER);
+  const { loading, error, data } = useQuery(GET_CURRENT_USER);
 
-  if(loading) return <Spinner />
-  if(error) return <p>Error: {error}</p>
+  if (loading) return <Spinner />;
+  if (error) return <p>Error: {error}</p>;
 
   const isLoggedIn = !!data.currentUser;
 
   const currentUser = isLoggedIn ? data.currentUser : null;
   return (
-    <div className="make-post-page">
-      <Profile 
+    <div className="submit-post-page">
+      <Profile
         isPost
         username={currentUser.username}
         profileImgUrl={currentUser.picture}
       />
-      { match.params.postId ? <EditPostForm /> : <CreatePostForm /> }
+      {match.params.postId ? <EditPostForm /> : <CreatePostForm />}
     </div>
   );
-}
-
+};
 
 export default SubmitPostPage;
