@@ -60,7 +60,7 @@ const postResolvers = {
             username: user.username,
             profilePicture: user.picture,
           },
-          createdAt: new Date(),
+          createdAt: new Date().toISOString(),
         });
         user.posts.push(post);
         await user.save();

@@ -14,20 +14,20 @@ const CreatePostContainer = ({ history }) => {
         ...createPost,
         commentsCount: 0,
         isLikedByCurrentUser: false,
-        likes: []
-      }
-      const { posts } = cache.readQuery({ query: GET_POSTS })
+        likes: [],
+      };
+      const { posts } = cache.readQuery({ query: GET_POSTS });
       cache.writeData({
         query: GET_POSTS,
-        data: { posts: posts.concat([newPost]) }
+        data: { posts: [newPost].concat(posts) },
       });
-      return history.push('/')
-    }
+      return history.push('/');
+    },
   });
 
-  return <SubmitPostForm onSubmit={body => createPost({ variables: { body }})} />
-
+  return (
+    <SubmitPostForm onSubmit={(body) => createPost({ variables: { body } })} />
+  );
 };
 
 export default withRouter(CreatePostContainer);
-
