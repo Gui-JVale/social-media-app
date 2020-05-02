@@ -12,8 +12,9 @@ import AuthPage from '../pages/auth/auth.component';
 import SubmitPostPage from '../pages/submit-post/submit-post.component';
 import PrivateRoute from '../components/general/private-route/private-route.component';
 import PostPage from '../pages/post/post.component';
+import { default as NotificationsPage } from '../pages/notifications/notifications.container';
 
-function App({ currentUser }) {
+function App({ currentUser, setNotificationsCount }) {
   return (
     <div className="App">
       <Header />
@@ -24,6 +25,12 @@ function App({ currentUser }) {
           <PrivateRoute
             path="/profile"
             component={ProfilePage}
+            currentUser={currentUser}
+          />
+
+          <PrivateRoute
+            path="/notifications"
+            component={NotificationsPage}
             currentUser={currentUser}
           />
 

@@ -38,6 +38,7 @@ const client = new ApolloClient({
 client.writeData({
   data: {
     currentComment: null,
+    notificationsCount: null,
   },
 });
 

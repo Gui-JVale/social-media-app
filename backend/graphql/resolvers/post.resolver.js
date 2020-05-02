@@ -1,6 +1,7 @@
 import { AuthenticationError, UserInputError } from "apollo-server-express";
 
 import Post from "../../models/post.model";
+import User from "../../models/user.model";
 
 const postResolvers = {
   Post: {
@@ -107,28 +108,41 @@ const postResolvers = {
         if (!user)
           throw new AuthenticationError("You must be logged in to do that!");
 
-        const { username, _id } = user;
+        const { username, _id, picture } = user;
 
         const post = await Post.findById(postId);
         if (post) {
           if (post.likes.find((like) => like.username === username)) {
+            // if is already liked, remove like
             post.likes = post.likes.filter(
               (like) => like.username !== username
             );
-            // post.likesCount--;
           } else {
+            // If its not liked, add like and notify post author
+            const postAuthor = await User.findById(post.author.id);
             post.likes.push({
               id: _id,
               username,
               createdAt: new Date().toISOString(),
             });
-            // post.likesCount++;
+            postAuthor.notifications.push({
+              actionType: "LIKED_POST",
+              read: false,
+              createdAt: new Date().toISOString(),
+              targetId: post.id,
+              author: {
+                id: _id,
+                username,
+                profilePicture: picture,
+              },
+            });
+            await postAuthor.save();
           }
           await post.save();
           return post;
         }
       } catch (e) {
-        throw new UserInputError("Post not found");
+        throw new UserInputError(e);
       }
     },
   },

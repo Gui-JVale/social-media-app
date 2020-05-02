@@ -12,6 +12,9 @@ const resolvers = {
     ...postResolvers.Mutation,
     ...commentResolvers.Mutation,
   },
+  User: {
+    ...userResolvers.User,
+  },
   Post: {
     ...postResolvers.Post,
   },

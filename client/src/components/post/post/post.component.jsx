@@ -21,7 +21,7 @@ const Post = (post) => {
     togglePostDropdownHidden,
   } = post;
   return (
-    <div className="post">
+    <div className="post" id={postId}>
       <ContentBox>
         <header className="post__header">
           {author.id === currentUserId ? (

@@ -7,6 +7,21 @@ export const GET_CURRENT_USER = gql`
       id
       username
       picture
+      unreadNotificationsCount
+    }
+  }
+`;
+
+export const GET_NOTIFICATIONS = gql`
+  query GetNotifications {
+    getNotifications {
+      actionType
+      read
+      targetId
+      author {
+        username
+        profilePicture
+      }
     }
   }
 `;
@@ -84,5 +99,11 @@ export const GET_COMMENT_BY_ID = gql`
 export const CLIENT__GET_CURRENT_COMMENT = gql`
   query GetCurrentComment {
     currentComment @client
+  }
+`;
+
+export const CLIENT__GET_NOTIFICATIONS_COUNT = gql`
+  query GetNotificationsCount {
+    notificationsCount @client
   }
 `;

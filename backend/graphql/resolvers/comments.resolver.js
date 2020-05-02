@@ -2,6 +2,7 @@ import { UserInputError, AuthenticationError } from "apollo-server-express";
 
 import Post from "../../models/post.model";
 import Comment from "../../models/comment.model";
+import User from "../../models/user.model";
 
 const commentResolvers = {
   Mutation: {
@@ -21,6 +22,8 @@ const commentResolvers = {
 
         const post = await Post.findById(postId);
         if (post) {
+          // If post exists, create comment and notify author
+          const postAuthor = await User.findById(post.author.id);
           const comment = await Comment.create({
             body,
             author: {
@@ -31,6 +34,22 @@ const commentResolvers = {
           });
           post.comments.push(comment);
           await post.save();
+
+          // Notify post author
+          postAuthor.notifications.push({
+            actionType: "COMMENTED_POST",
+            read: false,
+            createdAt: new Date().toISOString(),
+            targetId: post.id,
+            author: {
+              id: user._id,
+              username: user.username,
+              profilePicture: user.picture,
+            },
+          });
+
+          await postAuthor.save();
+
           return comment;
         } else {
           throw new UserInputError("Post not found");

@@ -12,6 +12,8 @@ const typeDefs = gql`
     posts: [Post]
     followers: [User]
     following: [User]
+    notifications: [Notification]!
+    unreadNotificationsCount: Int!
   }
 
   type Author {
@@ -43,6 +45,14 @@ const typeDefs = gql`
     username: String!
   }
 
+  type Notification {
+    actionType: String!
+    read: Boolean!
+    createAt: String!
+    targetId: ID!
+    author: Author!
+  }
+
   input CreateUserInput {
     username: String!
     firstName: String
@@ -60,6 +70,7 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     currentUser: User
+    getNotifications: [Notification]!
     getUserById(userId: ID!): User
     posts: [Post!]!
     getPostById(postId: ID!): Post
@@ -71,6 +82,7 @@ const typeDefs = gql`
     login(username: String!, password: String!): User
     logout: Boolean
     followUser(userToFollowId: ID!): User!
+    markNotificationsAsRead: [Notification]!
     createPost(body: String!, image: String): Post
     editPost(postId: ID!, body: String!): Post!
     deletePost(postId: ID!): Post!

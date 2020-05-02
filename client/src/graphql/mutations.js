@@ -22,6 +22,14 @@ export const FOLLOW_USER = gql`
   }
 `;
 
+export const MARK_NOTIFICATIONS_AS_READ = gql`
+  mutation MarkNotificationsAsRead {
+    markNotificationsAsRead {
+      read
+    }
+  }
+`;
+
 // Post Mutations
 export const CREATE_POST = gql`
   mutation CreatePost($body: String!) {
