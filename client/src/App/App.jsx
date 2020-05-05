@@ -14,7 +14,7 @@ import PrivateRoute from '../components/general/private-route/private-route.comp
 import PostPage from '../pages/post/post.component';
 import { default as NotificationsPage } from '../pages/notifications/notifications.container';
 
-function App({ currentUser, setNotificationsCount }) {
+function App({ currentUser }) {
   return (
     <div className="App">
       <Header />

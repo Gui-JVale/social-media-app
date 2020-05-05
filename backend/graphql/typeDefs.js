@@ -63,9 +63,7 @@ const typeDefs = gql`
     picture: String!
   }
 
-  type AuthPayload {
-    user: User
-  }
+  union SearchResult = Post | User
 
   type Query {
     users: [User!]!
@@ -75,6 +73,7 @@ const typeDefs = gql`
     posts: [Post!]!
     getPostById(postId: ID!): Post
     getPostComments(postId: ID!): [Comment]!
+    search(filter: String!): [SearchResult]
   }
 
   type Mutation {
