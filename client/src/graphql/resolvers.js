@@ -1,5 +1,9 @@
 import { gql } from 'apollo-boost';
-import { GET_CURRENT_USER, CLIENT__GET_CURRENT_COMMENT } from './queries';
+import {
+  GET_CURRENT_USER,
+  CLIENT__GET_CURRENT_COMMENT,
+  CLIENT__GET_SEARCH_FILTER,
+} from './queries';
 
 export const typeDefs = gql`
   extend type Post {
@@ -17,6 +21,8 @@ export const typeDefs = gql`
 
   extend type Mutation {
     setCurrentCommentBody(body: String!): String!
+    setSearchFilter(filter: String!): String!
+    resetSearchFilter: String!
   }
 `;
 
@@ -97,6 +103,24 @@ export const resolvers = {
         body,
         commentId,
       };
+    },
+
+    setSearchFilter: (_, { filter }, { cache }) => {
+      cache.writeQuery({
+        query: CLIENT__GET_SEARCH_FILTER,
+        data: { searchFilter: filter },
+      });
+
+      return filter;
+    },
+
+    resetSearchFilter: (_, __, { cache }) => {
+      cache.writeQuery({
+        query: CLIENT__GET_SEARCH_FILTER,
+        data: { searchFilter: '' },
+      });
+
+      return '';
     },
   },
 };

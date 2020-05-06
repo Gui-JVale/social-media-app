@@ -107,3 +107,9 @@ export const CLIENT__GET_NOTIFICATIONS_COUNT = gql`
     notificationsCount @client
   }
 `;
+
+export const CLIENT__GET_SEARCH_FILTER = gql`
+  query GetSearchFilter {
+    searchFilter @client
+  }
+`;

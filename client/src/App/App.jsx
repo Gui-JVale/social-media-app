@@ -12,6 +12,7 @@ import AuthPage from '../pages/auth/auth.component';
 import SubmitPostPage from '../pages/submit-post/submit-post.component';
 import PrivateRoute from '../components/general/private-route/private-route.component';
 import PostPage from '../pages/post/post.component';
+import SearchPage from '../pages/search/search-page.component';
 import { default as NotificationsPage } from '../pages/notifications/notifications.container';
 
 function App({ currentUser }) {
@@ -21,6 +22,8 @@ function App({ currentUser }) {
       <Container>
         <Switch>
           <Route exact path="/" component={Feed} />
+
+          <Route exact path="/search" component={SearchPage} />
 
           <PrivateRoute
             path="/profile"

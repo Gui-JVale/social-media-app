@@ -18,7 +18,7 @@ const MainNav = ({ currentUser, notificationsCount }) => (
         <MainNavLink linkName="Home" Icon={Home} url="/" />
       </li>
       <li className="main-nav__item">
-        <MainNavLink linkName="Search" Icon={Search} url="/profile" />
+        <MainNavLink linkName="Search" Icon={Search} url="/search" />
       </li>
       <li className="main-nav__item">
         <MainNavLink

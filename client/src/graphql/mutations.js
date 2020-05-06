@@ -132,3 +132,15 @@ export const CLIENT__SET_CURRENT_COMMENT = gql`
     setCurrentComment(body: $body, commentId: $commentId) @client
   }
 `;
+
+export const CLIENT__SET_SEARCH_FILTER = gql`
+  mutation SetSearchFilter($filter: String!) {
+    setSearchFilter(filter: $filter) @client
+  }
+`;
+
+export const CLIENT__RESET_SEARCH_FILTER = gql`
+  mutation SetSearchFilter {
+    resetSearchFilter @client
+  }
+`;

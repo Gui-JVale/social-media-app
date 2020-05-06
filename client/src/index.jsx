@@ -39,6 +39,7 @@ client.writeData({
   data: {
     currentComment: null,
     notificationsCount: null,
+    searchFilter: '',
   },
 });
 
