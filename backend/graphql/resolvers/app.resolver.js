@@ -17,12 +17,12 @@ const appResolvers = {
     },
   },
   Query: {
-    search: async (_, { filter }, context) => {
+    search: async (_, { filter }) => {
       const regex = new RegExp(filter, "i");
       const user = await User.find({ username: regex }, "username picture id");
       const post = await Post.find({ body: regex });
 
-      console.log(post);
+      if (!filter) return [];
       if (user && post) return [...user, ...post];
       if (user) return user;
       if (post) return post;

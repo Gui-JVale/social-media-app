@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import {
+  InMemoryCache,
+  IntrospectionFragmentMatcher,
+} from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-boost';
+import introspectionQueryResultData from './graphql/fragmentTypes.json';
 
 import { typeDefs, resolvers } from './graphql/resolvers';
 
@@ -20,7 +24,11 @@ const link = createHttpLink({
   credentials: 'include',
 });
 
-const cache = new InMemoryCache();
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+  introspectionQueryResultData,
+});
+
+const cache = new InMemoryCache({ fragmentMatcher });
 
 const client = new ApolloClient({
   cache,

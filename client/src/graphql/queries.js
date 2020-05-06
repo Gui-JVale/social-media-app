@@ -93,6 +93,30 @@ export const GET_COMMENT_BY_ID = gql`
   }
 `;
 
+// Global queries
+export const GET_SEARCH_RESULTS = gql`
+  query Search($filter: String!) {
+    searchFilter @client @export(as: "filter")
+    search(filter: $filter) {
+      ... on User {
+        id
+        username
+        picture
+      }
+
+      ... on Post {
+        id
+        body
+        author {
+          id
+          username
+          profilePicture
+        }
+      }
+    }
+  }
+`;
+
 //= ============================
 // CLIENT QUERIES
 //= ============================

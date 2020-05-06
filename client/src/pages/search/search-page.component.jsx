@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SearchResults from '../../components/general/search-results/search-results.component';
+import { default as SearchResults } from '../../containers/search-results.container';
 import { default as SearchForm } from '../../containers/search-form.container';
 
 const SearchPage = () => {
