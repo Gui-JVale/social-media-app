@@ -7,6 +7,7 @@ const userSchema = new Schema({
   firstName: { type: String },
   lastName: { type: String },
   picture: String,
+  bio: String,
   createdAt: { type: Date, default: Date.now },
   notifications: [
     {

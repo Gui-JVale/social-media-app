@@ -13,6 +13,7 @@ const userResolvers = {
     unreadNotificationsCount: (user) =>
       user.notifications.filter(({ read }) => !read).length,
   },
+
   Query: {
     users: async () => {
       try {
@@ -22,9 +23,12 @@ const userResolvers = {
         throw new Error(err);
       }
     },
+
     currentUser: async (_, __, context) => await context.getUser(),
+
     getNotifications: async (_, __, context) =>
       await context.getUser().notifications,
+
     getUserById: async (_, { userId }) => {
       try {
         const user = await User.findById(userId).populate("posts");
@@ -35,6 +39,7 @@ const userResolvers = {
       }
     },
   },
+
   Mutation: {
     login: async (_parent, { username, password }, context) => {
       try {
@@ -130,6 +135,19 @@ const userResolvers = {
       }
     },
 
+    editBio: async (_, { bio }, context) => {
+      try {
+        const user = await context.getUser();
+        if (!user)
+          throw new AuthenticationError("You must be logged in to do that");
+        await user.updateOne({ bio });
+        await user.save();
+        return user;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+
     createUser: async (
       _,
       {
@@ -177,6 +195,7 @@ const userResolvers = {
           picture,
           email,
           notifications: [],
+          bio: "",
           password: hash,
           createdAt: new Date(),
         });

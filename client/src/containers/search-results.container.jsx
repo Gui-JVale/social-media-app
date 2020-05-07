@@ -1,7 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
-import {} from '../graphql/mutations';
 import { GET_SEARCH_RESULTS } from '../graphql/queries';
 
 import Spinner from '../components/atoms/spinner/spinner.component';

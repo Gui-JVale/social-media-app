@@ -8,6 +8,7 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     picture: String
+    bio: String
     createdAt: String!
     posts: [Post]
     followers: [User]
@@ -82,6 +83,7 @@ const typeDefs = gql`
     logout: Boolean
     followUser(userToFollowId: ID!): User!
     markNotificationsAsRead: [Notification]!
+    editBio(bio: String!): User!
     createPost(body: String!, image: String): Post
     editPost(postId: ID!, body: String!): Post!
     deletePost(postId: ID!): Post!
