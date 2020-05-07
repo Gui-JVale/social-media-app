@@ -14,7 +14,10 @@ const AppContainer = () => {
   // Store notifications count on local state
   if (data.currentUser) {
     client.writeData({
-      data: { notificationsCount: data.currentUser.unreadNotificationsCount },
+      data: {
+        currentUser: data.currentUser,
+        notificationsCount: data.currentUser.unreadNotificationsCount,
+      },
     });
   }
 

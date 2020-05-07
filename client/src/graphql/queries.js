@@ -7,6 +7,7 @@ export const GET_CURRENT_USER = gql`
       id
       username
       picture
+      bio
       unreadNotificationsCount
     }
   }
@@ -31,6 +32,7 @@ export const GET_USER_BY_ID = gql`
     getUserById(userId: $userId) {
       username
       picture
+      bio
       isFollowedByCurrentUser @client
       followers {
         username
@@ -120,6 +122,18 @@ export const GET_SEARCH_RESULTS = gql`
 //= ============================
 // CLIENT QUERIES
 //= ============================
+export const CLIENT__GET_CURRENT_USER = gql`
+  query GetCurrentUser {
+    currentUser @client {
+      id
+      username
+      picture
+      bio
+      unreadNotificationsCount
+    }
+  }
+`;
+
 export const CLIENT__GET_CURRENT_COMMENT = gql`
   query GetCurrentComment {
     currentComment @client
