@@ -84,6 +84,7 @@ const typeDefs = gql`
     followUser(userToFollowId: ID!): User!
     markNotificationsAsRead: [Notification]!
     editBio(bio: String!): User!
+    editProfilePicture(imgUrl: String!): User!
     createPost(body: String!, image: String): Post
     editPost(postId: ID!, body: String!): Post!
     deletePost(postId: ID!): Post!

@@ -148,6 +148,19 @@ const userResolvers = {
       }
     },
 
+    editProfilePicture: async (_, { imgUrl }, context) => {
+      try {
+        const user = await context.getUser();
+        if (!user)
+          throw new AuthenticationError("You must be logged in to do that");
+        await user.updateOne({ picture: imgUrl });
+        await user.save();
+        return user;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+
     createUser: async (
       _,
       {
