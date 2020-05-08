@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import FormInput from '../../atoms/form-input/form-input.component';
 
 import useFormFields from '../../../hooks/use-form-fields';
 import useEditMode from '../../../hooks/use-edit-mode';
 
-const EditBio = ({ getBio, bio, editBio }) => {
+const EditBio = ({ bio, editBio }) => {
   const { editMode, toggleEditMode } = useEditMode();
   const { handleChange, values } = useFormFields({ bio });
 
@@ -14,7 +14,6 @@ const EditBio = ({ getBio, bio, editBio }) => {
     return editBio(values.bio);
   };
 
-  console.log(bio);
   return (
     <div className="edit-bio">
       <div className="edit-bio__link" onClick={toggleEditMode}>

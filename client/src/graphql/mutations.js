@@ -39,8 +39,8 @@ export const EDIT_BIO = gql`
 `;
 
 export const EDIT_PROFILE_PICTURE = gql`
-  mutation EditBio {
-    editProfilePicture {
+  mutation EditProfilePicture($imgUrl: String!) {
+    editProfilePicture(imgUrl: $imgUrl) {
       picture
     }
   }

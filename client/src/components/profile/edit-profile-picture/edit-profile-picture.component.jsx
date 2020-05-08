@@ -3,8 +3,10 @@ import React from 'react';
 import FormInput from '../../atoms/form-input/form-input.component';
 
 import useFormFields from '../../../hooks/use-form-fields';
+import useEditMode from '../../../hooks/use-edit-mode';
 
-const EditProfilePicture = ({ getPicture, picture }) => {
+const EditProfilePicture = ({ editProfilePicture, picture }) => {
+  const { editMode, toggleEditMode } = useEditMode();
   const initialState = picture ? { picture } : { picture: '' };
 
   const { handleChange, values } = useFormFields(
@@ -13,14 +15,19 @@ const EditProfilePicture = ({ getPicture, picture }) => {
     picture
   );
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    return editProfilePicture(values.picture);
+  };
+
   return (
     <div className="edit-picture">
-      <div className="edit-picture__link" onClick={getPicture}>
+      <div className="edit-picture__link" onClick={toggleEditMode}>
         Edit picture
       </div>
-      {picture ? (
+      {editMode ? (
         <div className="edit-picture__edit-mode">
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={onSubmit}>
             <FormInput
               name="picture"
               type="text"
@@ -28,6 +35,9 @@ const EditProfilePicture = ({ getPicture, picture }) => {
               value={values.picture}
               handleChange={handleChange}
             />
+            <div className="button">
+              <button type="submit">Edit Profile Picture</button>
+            </div>
           </form>
         </div>
       ) : null}
