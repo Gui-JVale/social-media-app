@@ -134,6 +134,22 @@ export const CLIENT__GET_CURRENT_USER = gql`
   }
 `;
 
+export const CLIENT__GET_CURRENT_USER_BIO = gql`
+  query GetCurrentUser {
+    currentUser @client {
+      bio
+    }
+  }
+`;
+
+export const CLIENT__GET_CURRENT_USER_PICTURE = gql`
+  query GetCurrentUser {
+    currentUser @client {
+      picture
+    }
+  }
+`;
+
 export const CLIENT__GET_CURRENT_COMMENT = gql`
   query GetCurrentComment {
     currentComment @client

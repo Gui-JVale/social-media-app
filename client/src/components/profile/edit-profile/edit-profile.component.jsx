@@ -1,7 +1,7 @@
 import React from 'react';
 
-import EditProfilePicture from '../edit-profile-picture/edit-profile-picture.component';
-import EditBio from '../edit-bio/edit-bio.component';
+import { default as EditProfilePicture } from '../../../containers/edit-profile-picture.container';
+import { default as EditBio } from '../../../containers/edit-bio.container';
 
 const EditProfile = () => {
   return (

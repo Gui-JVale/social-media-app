@@ -30,6 +30,22 @@ export const MARK_NOTIFICATIONS_AS_READ = gql`
   }
 `;
 
+export const EDIT_BIO = gql`
+  mutation EditBio($bio: String!) {
+    editBio(bio: $bio) {
+      bio
+    }
+  }
+`;
+
+export const EDIT_PROFILE_PICTURE = gql`
+  mutation EditBio {
+    editProfilePicture {
+      picture
+    }
+  }
+`;
+
 // Post Mutations
 export const CREATE_POST = gql`
   mutation CreatePost($body: String!) {
