@@ -12,7 +12,7 @@ const EditBioContainer = () => {
 
   return (
     <EditBio
-      bio={data.currentUser.bio}
+      bio={!!data.currentUser.bio ? data.currentUser.bio : ''}
       editBio={(bio) => editBio({ variables: { bio } })}
     />
   );

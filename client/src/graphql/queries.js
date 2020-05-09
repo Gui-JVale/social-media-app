@@ -38,6 +38,17 @@ export const GET_USER_BY_ID = gql`
         username
         picture
       }
+      posts {
+        id
+        body
+        dropdownHidden @client
+        isLikedByCurrentUser @client
+        likesCount
+        commentsCount
+        likes {
+          username
+        }
+      }
     }
   }
 `;
