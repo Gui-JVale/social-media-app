@@ -35,8 +35,8 @@ export const GET_USER_BY_ID = gql`
       bio
       isFollowedByCurrentUser @client
       followers {
+        id
         username
-        picture
       }
       posts {
         id
@@ -48,6 +48,28 @@ export const GET_USER_BY_ID = gql`
         likes {
           username
         }
+      }
+    }
+  }
+`;
+
+export const GET_USER_FOLLOWERS = gql`
+  query GetUserById($userId: ID!) {
+    getUserById(userId: $userId) {
+      followers {
+        id
+        username
+      }
+    }
+  }
+`;
+
+export const GET_USER_FOLLOWING = gql`
+  query GetUserById($userId: ID!) {
+    getUserById(userId: $userId) {
+      following {
+        id
+        username
       }
     }
   }

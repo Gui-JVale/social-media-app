@@ -160,3 +160,18 @@ export const CLIENT__RESET_SEARCH_FILTER = gql`
     resetSearchFilter @client
   }
 `;
+
+export const CLIENT__SET_USER_LIST_POPUP = gql`
+  mutation SetUserListPopup($query: String!) {
+    setUserListPopup(query: $query) {
+      isHidden
+      query
+    }
+  }
+`;
+
+export const CLIENT__TOGGLE_USER_LIST_POPUP = gql`
+  mutation SetSearchFilter {
+    toggleUserListPopup @client
+  }
+`;

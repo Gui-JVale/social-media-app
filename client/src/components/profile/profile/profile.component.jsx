@@ -6,6 +6,7 @@ import ProfilePicture from '../profile-picture/profile-picture.component';
 import { default as ProfileActionBar } from '../../../containers/profile-action-bar.container';
 import ProfileCoreInfo from '../profile-core-info/profile-core-info.component';
 import Post from '../../post/post/post.component';
+import UserListPopup from '../../general/user-list-popup/user-list-popup.component';
 
 const Profile = (props) => {
   const {
@@ -17,6 +18,10 @@ const Profile = (props) => {
     bio,
     posts,
     isFollowedByCurrentUser,
+    userFollowersData,
+    userFollowingData,
+    getFollowers,
+    getFollowing,
   } = props;
 
   return (
@@ -28,9 +33,15 @@ const Profile = (props) => {
 
       {!isPost ? (
         <div className="profile__general">
+          <UserListPopup
+            userFollowersData={userFollowersData}
+            userFollowingData={userFollowingData}
+          />
           <ProfileActionBar
             userId={userId}
             isFollowedByCurrentUser={isFollowedByCurrentUser}
+            getFollowers={getFollowers}
+            getFollowing={getFollowing}
           />
           {bio ? <div className="profile__bio">{bio}</div> : null}
           {posts.length > 0

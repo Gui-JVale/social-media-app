@@ -19,6 +19,12 @@ export const typeDefs = gql`
     isFollowedByCurrentUser: Boolean!
   }
 
+  input UserInput {
+    userId: ID!
+    username: String!
+    picture: String
+  }
+
   extend type Mutation {
     setCurrentCommentBody(body: String!): String!
     setSearchFilter(filter: String!): String!
