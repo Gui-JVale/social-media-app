@@ -29,7 +29,7 @@
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "passport": "^0.4.1"
   },
   "devDependencies": {
